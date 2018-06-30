@@ -1,0 +1,22 @@
+{
+    "User": {
+        "SQL": {
+            "create": "CREATE TABLE User (id INTEGER PRIMARY KEY, name CHAR(30))",
+            "insert": "INSERT INTO User SET ?",
+            "drop": "DROP TABLE User"
+        },
+        "keys": [
+            "id", "name"
+        ],
+        "data": [
+            {
+                "id": 1,
+                "name": "Nathan Tannar"
+            },
+            {
+                "id": 2,
+                "name": "Vlad Polin"
+            }
+        ]
+    }
+}

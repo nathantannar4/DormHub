@@ -1,0 +1,22 @@
+{
+  "name": "DormHub",
+  "version": "1.0.0",
+  "description": "CMPT 354 - Database Systems 1 Project",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nathantannar4/DormHub"
+  },
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "mysql": "^2.15.0",
+    "nodemon": "^1.14.11"
+  },
+  "engines": {
+    "node": ">=4.3"
+  },
+  "license": "MIT"
+}
