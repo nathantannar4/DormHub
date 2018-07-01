@@ -56,8 +56,8 @@ app.post("/deploy", function(request, response) {
         if (error) return response.json(error);
         // php now contain user defined php functions.
         php.deploy(function(error, result, output, printed){
-            console.log(output, result, printed);
             if (error) return response.json(error);
+            console.log("> Updates Deployed Successfully");
             response.json({"code": 200, "status": "DormHub Deployed"});
         });
     });
