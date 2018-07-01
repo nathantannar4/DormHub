@@ -53,13 +53,12 @@ app.get("/", function(request, response) {
 app.get("/deploy", function(request, response) {
     console.log("> Deploying updates...");
     execPhp('deploy.php', '/usr/bin/php', function(error, php, output) {
-        console.log(output);
         if (error) return response.json(error);
         // php now contain user defined php functions.
         php.deploy(function(error, result, output, printed){
-            console.log(output);
+            console.log(output, result, printed);
             if (error) return response.json(error);
-            response.json(result);
+            response.json({"code": 200, "status": "DormHub Deployed"});
         });
     });
 })
