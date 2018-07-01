@@ -50,7 +50,7 @@ app.get("/", function(request, response) {
     response.json({"code": 200, "status": "Welcome to DormHub"});
 })
 
-app.get("/deploy", function(request, response) {
+app.post("/deploy", function(request, response) {
     console.log("> Deploying updates...");
     execPhp('deploy.php', '/usr/bin/php', function(error, php, output) {
         if (error) return response.json(error);
