@@ -6,6 +6,7 @@
 
 - MySQL
 - NodeJS 
+- PHP (for automated deployment)
 
 ## Start
 
