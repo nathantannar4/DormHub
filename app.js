@@ -52,7 +52,7 @@ app.get("/", function(request, response) {
 
 app.get("/deploy", function(request, response) {
     console.log("> Deploying updates...");
-    execPhp(__dirname + 'deploy.php', '/usr/bin/php', function(error, php, output) {
+    execPhp('deploy.php', '/usr/bin/php', function(error, php, output) {
         console.log(output);
         if (error) return response.json(error);
         // php now contain user defined php functions.
