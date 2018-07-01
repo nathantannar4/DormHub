@@ -86,16 +86,24 @@ app.get("/populate", function(request, response) {
 
 /// Query for all User's 
 app.get("/users", function(request, response) {
-    queryDatabase("SELECT * FROM User", null, function(error, rows, feilds) {
+    queryDatabase("SELECT * FROM User", null, function(error, rows, fields) {
         if (error) return handleDatabaseConnectionError(response);
         response.json(rows);
     });
 })
 
-/// Query for user with specified ID
+/// Query for User with specified ID
 app.get("/user/:userID", function(request, response) {
     const userID = request.params.userID
-    queryDatabase("SELECT * FROM User WHERE id = " + userID, null, function(error, rows, feilds) {
+    queryDatabase("SELECT * FROM User WHERE id = " + userID, null, function(error, rows, fields) {
+        if (error) return handleDatabaseConnectionError(response);
+        response.json(rows);
+    });
+})
+
+/// Query for all Reviews's 
+app.get("/reviews", function(request, response) {
+    queryDatabase("SELECT * FROM Review", null, function(error, rows, fields) {
         if (error) return handleDatabaseConnectionError(response);
         response.json(rows);
     });
