@@ -51,6 +51,7 @@ app.get("/", function(request, response) {
 })
 
 app.get("/deploy", function(request, response) {
+    console.log("> Deploying updates...");
     const filename = "deploy.sh";
     const script = childProcess.exec('sh ' + filename,
         (error, stdout, stderr) => {
