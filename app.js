@@ -3,6 +3,7 @@
 const mysql = require('mysql');
 const express = require("express");
 const bodyParser = require('body-parser');
+const childProcess = require('child_process');
 
 /* Connection Pooling is a mechanism to maintain a cache of database 
 connections. This way, that connection can be reused after releasing it */
@@ -31,23 +32,40 @@ function getConnection(callback) {
 
 function queryDatabase(query, data, callback) {
     getConnection(function(error, connection) {
-        if (error) {
+        if (error) return callback(error, null, null);
+        connection.query(query, data, function(error, rows, feilds){
+            connection.release();
+            callback(error, rows, feilds);       
+        });
+        connection.on('error', function(error) {      
             callback(error, null, null);
-        } else {
-            connection.query(query, data, function(error, rows, feilds){
-                connection.release();
-                callback(error, rows, feilds);       
-            });
-            connection.on('error', function(error) {      
-                callback(error, null, null);
-            });
-        }
+        });
     });
 }
 
 const app = express();
 app.use(bodyParser.json())
 
+app.get("/", function(request, response) {
+    response.json({"code": 200, "status": "Welcome to DormHub"});
+})
+
+app.get("/deploy", function(request, response) {
+    const filename = "deploy.sh";
+    const script = childProcess.exec('sh ' + filename,
+        (error, stdout, stderr) => {
+            console.log(`${stdout}`);
+            console.log(`${stderr}`);
+            if (error !== null) {
+                console.log(`exec error: ${error}`);
+                response.json(error);
+            } else {
+                response.json({"code": 200, "status": "Welcome to DormHub"});
+            }
+    });
+})
+
+/// Populates the SQL database with the sample data
 app.get("/populate", function(request, response) {
 
     const sampleData = require("./SampleData.json");

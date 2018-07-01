@@ -11,6 +11,7 @@
     "start": "nodemon app.js"
   },
   "dependencies": {
+    "child_process": "^1.0.2",
     "express": "^4.16.3",
     "mysql": "^2.15.0",
     "nodemon": "^1.14.11"

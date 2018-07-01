@@ -7,15 +7,10 @@
 - MySQL
 - NodeJS 
 
-## Installation
-
-```
-npm install
-```
-
 ## Start
 
 Edit `app.js` to reflect your MySQL database connection parameters
+> You may need to create a new database. By default `app.js` connects to the `prod` database.
 
 ```
 npm start
