@@ -19,7 +19,7 @@ npm start
 
 ## Automated Deployment
 
-Automated deployment is set up to automatically pull updates from a GitHub repo whenever it is pushed to. This is done by utilizing GitHubs Webhook functionality. Automated Deployment requires PHP and an ssh keypair to be generated on the server and added to your GitHub profile's keys
+Automated deployment is set up to automatically pull updates from a GitHub repo whenever it is pushed to. This is done by utilizing GitHubs Webhook functionality. Automated Deployment requires an ssh keypair to be generated on the server and added to your GitHub profile's keys.
 
 ## Sample Data
 

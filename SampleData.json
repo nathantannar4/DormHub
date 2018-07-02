@@ -1,9 +1,7 @@
 {
-    "Landlord": {
+    "Person": {
         "SQL": {
-            "create": "CREATE TABLE Landlord(id INTEGER PRIMARY KEY, name VARCHAR(30), gender VARCHAR(10), phoneNumber VARCHAR(10), signUpDate DATE)",
-            "insert": "INSERT INTO Landlord SET ?",
-            "drop": "DROP TABLE IF EXISTS Landlord"
+            "create": "CREATE TABLE Person(id INTEGER PRIMARY KEY, name VARCHAR(30), gender VARCHAR(10), phoneNumber VARCHAR(10), signUpDate DATE)"
         },
         "data": [{
             "id": 1,
@@ -35,44 +33,145 @@
             "gender": "Male",
             "phoneNumber": "9984029662",
             "signUpDate": "2018-05-13 16:14:19"
-          }]
-    },
-    "Seeker": {
-        "SQL": {
-            "create": "CREATE TABLE Seeker(id INTEGER PRIMARY KEY, name VARCHAR(30), gender VARCHAR(10), phoneNumber VARCHAR(10), signUpDate DATE)",
-            "insert": "INSERT INTO Seeker SET ?",
-            "drop": "DROP TABLE IF EXISTS Seeker"
-        },
-        "data": [{
-            "id": 1,
+          }, {
+            "id": 6,
             "name": "Karlan Topper",
             "gender": "Male",
             "phoneNumber": "0572867700",
             "signUpDate": "2018-03-06 04:01:20"
           }, {
-            "id": 2,
+            "id": 7,
             "name": "Donn Gingell",
             "gender": "Male",
             "phoneNumber": "7911785031",
             "signUpDate": "2017-07-03 06:04:12"
           }, {
-            "id": 3,
+            "id": 8,
             "name": "Ronalda Alexandersen",
             "gender": "Female",
             "phoneNumber": "9797205630",
             "signUpDate": "2018-01-19 01:25:02"
           }, {
-            "id": 4,
+            "id": 9,
             "name": "Michele Emmatt",
             "gender": "Male",
             "phoneNumber": "4183214971",
             "signUpDate": "2017-12-25 17:23:54"
           }, {
-            "id": 5,
+            "id": 10,
             "name": "Darryl Itzakovitz",
             "gender": "Male",
             "phoneNumber": "7573743424",
             "signUpDate": "2017-08-19 14:00:17"
+          }]
+    },
+    "Seeker": {
+        "SQL": {
+            "create": "CREATE TABLE Seeker(pid INTEGER PRIMARY KEY, FOREIGN KEY(pid) REFERENCES Person(id) ON UPDATE CASCADE ON DELETE CASCADE)"
+        },
+        "data": [{
+            "pid": 1
+          }, {
+            "pid": 2
+          }, {
+            "pid": 3
+          }, {
+            "pid": 4
+          }, {
+            "pid": 5
+          }]
+    },
+    "Landlord": {
+        "SQL": {
+            "create": "CREATE TABLE Landlord(pid INTEGER PRIMARY KEY, FOREIGN KEY(pid) REFERENCES Person(id) ON UPDATE CASCADE ON DELETE CASCADE)"
+        },
+        "data": [{
+            "pid": 6
+          }, {
+            "pid": 7
+          }, {
+            "pid": 8
+          }, {
+            "pid": 9
+          }, {
+            "pid": 10
+          }]
+    },
+    "Location": {
+        "SQL": {
+            "create": "CREATE TABLE Location(city VARCHAR(50) PRIMARY KEY, transportation VARCHAR(255), stores VARCHAR(255), entertainment CHAR(255), crimeRate REAL)"
+        },
+        "data": [{
+            "city": "Madison",
+            "transportation": "Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.",
+            "stores": "Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.",
+            "entertainment": "Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.",
+            "crimeRate": 26.96
+          }, {
+            "city": "Marumori",
+            "transportation": "Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.",
+            "stores": "Fusce consequat. Nulla nisl. Nunc nisl.",
+            "entertainment": "Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
+            "crimeRate": 14.94
+          }, {
+            "city": "La Libertad",
+            "transportation": "Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.",
+            "stores": "In congue. Etiam justo. Etiam pretium iaculis justo.",
+            "entertainment": "Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.",
+            "crimeRate": 4.69
+          }, {
+            "city": "Tanjay",
+            "transportation": "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",
+            "stores": "Fusce consequat. Nulla nisl. Nunc nisl.",
+            "entertainment": "In congue. Etiam justo. Etiam pretium iaculis justo.",
+            "crimeRate": 10.62
+          }, {
+            "city": "Kupahandap",
+            "transportation": "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.",
+            "stores": "Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.",
+            "entertainment": "Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.",
+            "crimeRate": 29.76
+          }]
+    },
+    "Occupation": {
+        "SQL": {
+            "create": "CREATE TABLE Occupation(id INTEGER, pid INTEGER, placeOfStudy VARCHAR(140), title VARCHAR(30), companyName VARCHAR(30), companyAddress VARCHAR(35), PRIMARY KEY (id, pid), FOREIGN KEY(pid) REFERENCES Person(id) ON DELETE CASCADE ON UPDATE CASCADE)"
+        },
+        "data": [{
+            "id": 1,
+            "pid": 1,
+            "placeOfStudy": "Alvarães University",
+            "title": "Web Designer III",
+            "companyName": "Jetpulse",
+            "companyAddress": "73320 Johnson Avenue"
+          }, {
+            "id": 2,
+            "pid": 2,
+            "placeOfStudy": "Toledo University",
+            "title": "Project Manager",
+            "companyName": "Eamia",
+            "companyAddress": "87 Barnett Drive"
+          }, {
+            "id": 3,
+            "pid": 3,
+            "placeOfStudy": "Charleville-Mézières University",
+            "title": "Office Assistant II",
+            "companyName": "Muxo",
+            "companyAddress": "46 New Castle Pass"
+          }, {
+            "id": 4,
+            "pid": 4,
+            "placeOfStudy": "Krajan Gebangan University",
+            "title": "Food Chemist",
+            "companyName": "Brightdog",
+            "companyAddress": "56 Twin Pines Crossing"
+          }, {
+            "id": 5,
+            "pid": 5,
+            "placeOfStudy": "Peteranec University",
+            "title": "VP Quality Control",
+            "companyName": "Gabspot",
+            "companyAddress": "54372 Jackson Crossing"
           }]
     }
 }
