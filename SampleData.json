@@ -1,22 +1,78 @@
 {
-    "User": {
+    "Landlord": {
         "SQL": {
-            "create": "CREATE TABLE User (id INTEGER PRIMARY KEY, name CHAR(30))",
-            "insert": "INSERT INTO User SET ?",
-            "drop": "DROP TABLE User"
+            "create": "CREATE TABLE Landlord(id INTEGER PRIMARY KEY, name VARCHAR(30), gender VARCHAR(10), phoneNumber VARCHAR(10), signUpDate DATE)",
+            "insert": "INSERT INTO Landlord SET ?",
+            "drop": "DROP TABLE IF EXISTS Landlord"
         },
-        "keys": [
-            "id", "name"
-        ],
-        "data": [
-            {
-                "id": 1,
-                "name": "Nathan Tannar"
-            },
-            {
-                "id": 2,
-                "name": "Vlad Polin"
-            }
-        ]
+        "data": [{
+            "id": 1,
+            "name": "Cthrine Pimmocke",
+            "gender": "Female",
+            "phoneNumber": "8612143446",
+            "signUpDate": "2018-05-06 20:29:51"
+          }, {
+            "id": 2,
+            "name": "Corey Knotte",
+            "gender": "Male",
+            "phoneNumber": "9149674110",
+            "signUpDate": "2017-11-04 01:34:58"
+          }, {
+            "id": 3,
+            "name": "Genny Sparkwill",
+            "gender": "Female",
+            "phoneNumber": "8217941262",
+            "signUpDate": "2018-01-11 05:08:59"
+          }, {
+            "id": 4,
+            "name": "Jillene MacCumeskey",
+            "gender": "Female",
+            "phoneNumber": "2209135621",
+            "signUpDate": "2018-02-09 20:44:28"
+          }, {
+            "id": 5,
+            "name": "Brian Goodman",
+            "gender": "Male",
+            "phoneNumber": "9984029662",
+            "signUpDate": "2018-05-13 16:14:19"
+          }]
+    },
+    "Seeker": {
+        "SQL": {
+            "create": "CREATE TABLE Seeker(id INTEGER PRIMARY KEY, name VARCHAR(30), gender VARCHAR(10), phoneNumber VARCHAR(10), signUpDate DATE)",
+            "insert": "INSERT INTO Seeker SET ?",
+            "drop": "DROP TABLE IF EXISTS Seeker"
+        },
+        "data": [{
+            "id": 1,
+            "name": "Karlan Topper",
+            "gender": "Male",
+            "phoneNumber": "0572867700",
+            "signUpDate": "2018-03-06 04:01:20"
+          }, {
+            "id": 2,
+            "name": "Donn Gingell",
+            "gender": "Male",
+            "phoneNumber": "7911785031",
+            "signUpDate": "2017-07-03 06:04:12"
+          }, {
+            "id": 3,
+            "name": "Ronalda Alexandersen",
+            "gender": "Female",
+            "phoneNumber": "9797205630",
+            "signUpDate": "2018-01-19 01:25:02"
+          }, {
+            "id": 4,
+            "name": "Michele Emmatt",
+            "gender": "Male",
+            "phoneNumber": "4183214971",
+            "signUpDate": "2017-12-25 17:23:54"
+          }, {
+            "id": 5,
+            "name": "Darryl Itzakovitz",
+            "gender": "Male",
+            "phoneNumber": "7573743424",
+            "signUpDate": "2017-08-19 14:00:17"
+          }]
     }
 }
