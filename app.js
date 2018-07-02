@@ -3,7 +3,7 @@
 const mysql = require('mysql');
 const express = require("express");
 const bodyParser = require('body-parser');
-const execPhp = require('exec-php');
+const childProcess = require('child_process');
 
 /* Connection Pooling is a mechanism to maintain a cache of database 
 connections. This way, that connection can be reused after releasing it */
@@ -61,17 +61,17 @@ app.get("/", function(request, response) {
 
 app.post("/deploy", function(request, response) {
     console.log("> Deploying updates...");
-    execPhp('deploy.php', '/usr/bin/php', function(error, php, output) {
-        if (error) return response.json(error);
-        // php now contain user defined php functions.
-        php.deploy(function(error, result, output, printed){
-            if (error) {
-                console.log("> Deployment Failed");
-                return response.json(error);
-            }
-            console.log("> Updates Deployed Successfully");
-            response.json({"code": 200, "status": "DormHub Deployed"});
-        });
+    conosle.log(request);
+    childProcess.exec('sh deploy.sh', function(error, stdout, stderr) {
+        console.log(`${stdout}`);
+        console.log(`${stderr}`);
+        if (error) {
+            console.log(`exec error: ${error}`);
+            console.log("> Deployment Failed");
+            return response.json(error);
+        }
+        console.log("> Updates Deployed Successfully");
+        response.json({"code": 200, "status": "DormHub Deployed"});
     });
 })
 
