@@ -63,10 +63,7 @@ app.post("/deploy", function(request, response) {
     console.log("> Deploying updates...");
     console.log(request);
     childProcess.exec('sh deploy.sh', function(error, stdout, stderr) {
-        console.log(`${stdout}`);
-        console.log(`${stderr}`);
         if (error) {
-            console.log(`exec error: ${error}`);
             console.log("> Deployment Failed");
             return response.json(error);
         }
