@@ -44,12 +44,13 @@ function queryDatabase(query, data) {
         getConnection().then((connection) => {
             connection.query(query, data, function(error, rows, fields){
                 connection.release();
-                resolve(rows, fields);
+                if (error) resolve(rows, fields);
+                else reject(error);
             });
-            connection.on('error', function(error) {  
-                console.log(error);    
-                reject(error);
-            });
+            // connection.on('error', function(error) {  
+            //     console.log(error);    
+            //     reject(error);
+            // });
         }).catch((error) => {
             console.log(error);
             reject(error);
@@ -148,7 +149,7 @@ app.get("/person/:id", function(request, response) {
 
 /// Query for all Seekers 
 app.get("/seekers", function(request, response) {
-    queryDatabase("SELECT * FROM Seeker")
+    queryDatabase("SELECT * FROM Seeker, Person WHERE Seeker.pid = Person.id")
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -159,7 +160,7 @@ app.get("/seekers", function(request, response) {
 /// Query for Seeker with specified ID
 app.get("/seeker/:id", function(request, response) {
     const id = request.params.id
-    queryDatabase("SELECT * FROM Seeker WHERE id = " + id)
+    queryDatabase("SELECT * FROM Seeker, Person WHERE Seeker.pid = Person.id AND WHERE id = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -169,7 +170,7 @@ app.get("/seeker/:id", function(request, response) {
 
 /// Query for all Landlords 
 app.get("/landlords", function(request, response) {
-    queryDatabase("SELECT * FROM Landlord")
+    queryDatabase("SELECT * FROM Landlord, Person WHERE Landlord.pid = Person.id")
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -180,7 +181,7 @@ app.get("/landlords", function(request, response) {
 /// Query for Seeker with specified ID
 app.get("/landlord/:id", function(request, response) {
     const id = request.params.id
-    queryDatabase("SELECT * FROM Landlord WHERE id = " + id)
+    queryDatabase("SELECT * FROM Landlord, Person WHERE Landlord.pid = Person.id AND WHERE id = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 

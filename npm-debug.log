@@ -1,0 +1,65 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'i', '-g', 'npm' ]
+2 info using npm@3.5.2
+3 info using node@v4.2.6
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readGlobalPackageData
+7 silly fetchPackageMetaData npm
+8 silly fetchNamedPackageData npm
+9 silly mapToRegistry name npm
+10 silly mapToRegistry using default registry
+11 silly mapToRegistry registry https://registry.npmjs.org/
+12 silly mapToRegistry uri https://registry.npmjs.org/npm
+13 verbose request uri https://registry.npmjs.org/npm
+14 verbose request no auth needed
+15 info attempt registry request try #1 at 12:07:31 PM
+16 verbose request id 78b968442bb8fcd5
+17 http request GET https://registry.npmjs.org/npm
+18 http 200 https://registry.npmjs.org/npm
+19 verbose headers { date: 'Wed, 04 Jul 2018 19:07:31 GMT',
+19 verbose headers   'content-type': 'application/json; charset=UTF-8',
+19 verbose headers   'transfer-encoding': 'chunked',
+19 verbose headers   connection: 'keep-alive',
+19 verbose headers   'set-cookie': [ '__cfduid=dcc91cbd1e50e204d1219d634b8c6535e1530731251; expires=Thu, 04-Jul-19 19:07:31 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+19 verbose headers   'cache-control': 'max-age=300',
+19 verbose headers   'cf-cache-status': 'HIT',
+19 verbose headers   'cf-ray': '4353e0135ca33ae4-YVR',
+19 verbose headers   etag: 'W/"1faf083e8ff8b751819a52cb48be528c"',
+19 verbose headers   'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+19 verbose headers   'last-modified': 'Fri, 29 Jun 2018 20:03:18 GMT',
+19 verbose headers   vary: 'accept-encoding, accept',
+19 verbose headers   server: 'cloudflare',
+19 verbose headers   'content-encoding': 'gzip' }
+20 silly get cb [ 200,
+20 silly get   { date: 'Wed, 04 Jul 2018 19:07:31 GMT',
+20 silly get     'content-type': 'application/json; charset=UTF-8',
+20 silly get     'transfer-encoding': 'chunked',
+20 silly get     connection: 'keep-alive',
+20 silly get     'set-cookie': [ '__cfduid=dcc91cbd1e50e204d1219d634b8c6535e1530731251; expires=Thu, 04-Jul-19 19:07:31 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+20 silly get     'cache-control': 'max-age=300',
+20 silly get     'cf-cache-status': 'HIT',
+20 silly get     'cf-ray': '4353e0135ca33ae4-YVR',
+20 silly get     etag: 'W/"1faf083e8ff8b751819a52cb48be528c"',
+20 silly get     'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+20 silly get     'last-modified': 'Fri, 29 Jun 2018 20:03:18 GMT',
+20 silly get     vary: 'accept-encoding, accept',
+20 silly get     server: 'cloudflare',
+20 silly get     'content-encoding': 'gzip' } ]
+21 verbose get saving npm to /home/ntannar/.npm/registry.npmjs.org/npm/.cache.json
+22 verbose stack TypeError: gid must be an unsigned int
+22 verbose stack     at TypeError (native)
+22 verbose stack     at Object.fs.chown (fs.js:1033:11)
+22 verbose stack     at Object.chown (/usr/share/npm/node_modules/graceful-fs/polyfills.js:208:17)
+22 verbose stack     at /usr/share/npm/node_modules/chownr/chownr.js:12:43
+22 verbose stack     at /usr/share/npm/node_modules/graceful-fs/graceful-fs.js:140:16
+22 verbose stack     at FSReqWrap.oncomplete (fs.js:82:15)
+23 verbose cwd /home/ntannar/Desktop/DormHub
+24 error Linux 4.4.0-130-generic
+25 error argv "/usr/bin/nodejs" "/usr/bin/npm" "i" "-g" "npm"
+26 error node v4.2.6
+27 error npm  v3.5.2
+28 error gid must be an unsigned int
+29 error If you need help, you may report this error at:
+29 error     <https://github.com/npm/npm/issues>
+30 verbose exit [ 1, true ]
