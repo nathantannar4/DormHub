@@ -160,7 +160,7 @@ app.get("/seekers", function(request, response) {
 /// Query for Seeker with specified ID
 app.get("/seeker/:id", function(request, response) {
     const id = request.params.id
-    queryDatabase("SELECT * FROM Seeker, Person WHERE Seeker.pid = Person.id AND WHERE id = " + id)
+    queryDatabase("SELECT * FROM Seeker, Person WHERE Seeker.pid = Person.id AND WHERE pid = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -181,7 +181,7 @@ app.get("/landlords", function(request, response) {
 /// Query for Seeker with specified ID
 app.get("/landlord/:id", function(request, response) {
     const id = request.params.id
-    queryDatabase("SELECT * FROM Landlord, Person WHERE Landlord.pid = Person.id AND WHERE id = " + id)
+    queryDatabase("SELECT * FROM Landlord, Person WHERE Landlord.pid = Person.id AND WHERE pid = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -202,7 +202,7 @@ app.get("/reviews", function(request, response) {
 /// Query for Review with specified ID
 app.get("/review/:id", function(request, response) {
     const id = request.params.id
-    queryDatabase("SELECT * FROM Review WHERE id = " + id)
+    queryDatabase("SELECT * FROM Review WHERE pid = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
