@@ -44,8 +44,8 @@ function queryDatabase(query, data) {
         getConnection().then((connection) => {
             connection.query(query, data, function(error, rows, fields){
                 connection.release();
-                if (error) resolve(rows, fields);
-                else reject(error);
+                if (error) reject(rows, fields);
+                else resolve(error);
             });
             // connection.on('error', function(error) {  
             //     console.log(error);    
