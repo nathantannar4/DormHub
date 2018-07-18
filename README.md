@@ -6,15 +6,19 @@
 
 - MySQL
 - NodeJS 
+- ReactJS
 
 ## Start
 
-Edit `app.js` to reflect your MySQL database connection parameters
-> You may need to create a new database. By default `app.js` connects to the `prod` database.
+Edit `api.js` to reflect your MySQL database connection parameters
+> You may need to create a new database. By default `api.js` connects to the `prod` database.
 
 ```
-npm install // To install the dependencies
-npm start
+npm i // To install the API dependencies
+cd app
+npm i // To install the ReactJS App dependencies
+ce ..
+npm start // Start the API/App concurrently
 ```
 
 ## Automated Deployment
