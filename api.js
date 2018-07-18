@@ -44,12 +44,13 @@ function queryDatabase(query, data) {
         getConnection().then((connection) => {
             connection.query(query, data, function(error, rows, fields){
                 connection.release();
-                resolve(rows, fields);
+                if (error) reject(error);
+                else resolve(rows, fields);
             });
-            connection.on('error', function(error) {  
-                console.log(error);    
-                reject(error);
-            });
+            // connection.on('error', function(error) {  
+            //     console.log(error);    
+            //     reject(error);
+            // });
         }).catch((error) => {
             console.log(error);
             reject(error);
@@ -74,11 +75,6 @@ Array.prototype.flatMap = function(f) { return flatMap(f,this) }
 /// Create the Exporess web app
 const app = express();
 app.use(bodyParser.json())
-
-// Express only serves static assets in production
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
-  }
 
 /***********************/
 /******* Routes ********/
@@ -153,7 +149,7 @@ app.get("/person/:id", function(request, response) {
 
 /// Query for all Seekers 
 app.get("/seekers", function(request, response) {
-    queryDatabase("SELECT * FROM Seeker")
+    queryDatabase("SELECT * FROM Seeker, Person WHERE Seeker.pid = Person.id")
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -164,7 +160,7 @@ app.get("/seekers", function(request, response) {
 /// Query for Seeker with specified ID
 app.get("/seeker/:id", function(request, response) {
     const id = request.params.id
-    queryDatabase("SELECT * FROM Seeker WHERE id = " + id)
+    queryDatabase("SELECT * FROM Seeker, Person WHERE Seeker.pid = Person.id AND Seeker.pid = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -174,7 +170,7 @@ app.get("/seeker/:id", function(request, response) {
 
 /// Query for all Landlords 
 app.get("/landlords", function(request, response) {
-    queryDatabase("SELECT * FROM Landlord")
+    queryDatabase("SELECT * FROM Landlord, Person WHERE Landlord.pid = Person.id")
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -185,7 +181,7 @@ app.get("/landlords", function(request, response) {
 /// Query for Seeker with specified ID
 app.get("/landlord/:id", function(request, response) {
     const id = request.params.id
-    queryDatabase("SELECT * FROM Landlord WHERE id = " + id)
+    queryDatabase("SELECT * FROM Landlord, Person WHERE Landlord.pid = Person.id AND Seeker.pid = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -206,7 +202,7 @@ app.get("/reviews", function(request, response) {
 /// Query for Review with specified ID
 app.get("/review/:id", function(request, response) {
     const id = request.params.id
-    queryDatabase("SELECT * FROM Review WHERE id = " + id)
+    queryDatabase("SELECT * FROM Review WHERE pid = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -241,5 +237,5 @@ app.get("/location/:city", function(request, response) {
 
 /// Start the app listening on port 3000
 app.listen(3001, function() {
-    console.log('> API Listening at localhost:3001');
+    console.log('> Listening at localhost:3000');
 });
