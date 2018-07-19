@@ -11,7 +11,6 @@ class Persons extends Component {
         fetch('/persons')
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 this.setState({
                     isLoaded: true,
                     people: data
@@ -37,16 +36,30 @@ class Persons extends Component {
             return <div>Loading...</div>;
         } else {
             return (
-                <ul>
-                    {people.map(person => (
-                        <li key={person.id}>
-                            {person.name}
-                        </li>
-                    ))}
-                </ul>
+                <table>
+                    <thead>{this.generateHeaders(people)}</thead>
+                    <tbody>{this.generateRows(people)}</tbody>
+                </table>
             );
         }
     }
+
+    generateHeaders(data) {
+        if (data.length === 0) { return }
+        const keys = Object.keys(data[0])
+        const cells = keys.map((key) => (<th key={key}>{key}</th>))
+        return <tr>{cells}</tr>
+    }
+
+    generateRows(data) {
+        if (data.length === 0) { return }
+        const keys = Object.keys(data[0])
+        return data.map(function(item) {
+            const cells = keys.map((key) => (<td key={key}>{item[key]}</td>))
+            return <tr key={item.id}>{cells}</tr>
+        });
+    }
+
 }
 
 export default Persons;

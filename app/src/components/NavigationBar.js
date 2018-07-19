@@ -6,17 +6,17 @@ import Typography from '@material-ui/core/Typography'
 const NavigationBar = () => {
   return (
     <div>
-      <AppBar position="static">
+      {/* <AppBar position="static">
         <Toolbar>
           <Typography variant="title" color="inherit">
             DormHub
-          </Typography>
+          </Typography> */}
           <ul>
             <li><Link to='/'>Home</Link></li>
             <li><Link to='/persons'>Persons</Link></li>
           </ul>
-        </Toolbar>
-      </AppBar>
+        {/* </Toolbar>
+      </AppBar> */}
     </div>
   )
 }

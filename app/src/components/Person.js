@@ -4,17 +4,16 @@ class Person extends Component {
 
     constructor(props) {
         super(props)
-        this.state = { people: [], isLoaded: false, error: null }
+        this.state = { person: null, isLoaded: false, error: null }
     }
 
     componentDidMount() {
         fetch('/person/' + this.props.match.params.id)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 this.setState({
                     isLoaded: true,
-                    people: data
+                    person: data[0]
                 });
             },
             // Note: it's important to handle errors here
@@ -30,22 +29,21 @@ class Person extends Component {
     }
 
     render() {
-        const { error, isLoaded, people } = this.state;
+        const { error, isLoaded, person } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
             return <div>Loading...</div>;
         } else {
-            return (
-                <ul>
-                    {people.map(person => (
-                        <li key={person.id}>
-                            {person.name}
-                        </li>
-                    ))}
-                </ul>
-            );
+            return this.generateView(person)
         }
+    }
+
+    generateView(data) {
+        const keys = Object.keys(data)
+        return keys.map((key) => ( 
+            <p key={key}>{data[key]}</p>
+        ))
     }
 }
 
