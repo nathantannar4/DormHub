@@ -264,7 +264,7 @@ app.get("/ratings", function(request, response) {
 /// 8. Division query
 /// Return Persons who have been reviewed by all other Persons
 app.get("/verifiedRatings", function(request, response) {
-    queryDatabase("SELECT * From Person p WHERE NOT EXISTS (SELECT * FROM Review r WHERE r.revieweePID = p.id)")
+    queryDatabase("UPDATE Housing SET * price = " + price + " WHERE id = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
