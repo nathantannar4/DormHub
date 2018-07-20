@@ -276,31 +276,31 @@
 			"moveInDate": "2018-01-01 08:12:39",
 			"moveOutDate": "2018-01-09 11:00:12",
 			"streetAddress": "1st Ave",
-			"V1A1B2"
+			"postalCode": "V1A1B2"
 		}, {
 			"hid": 101,
 			"moveInDate": "2018-03-01 12:07:12",
 			"moveOutDate": "2018-12-27 13:59:15",
 			"streetAddress": "2nd Ave",
-			"V1A1B3"
+			"postalCode": "V1A1B3"
 		}, {
 			"hid": 102,
 			"moveInDate": "2018-12-27 09:56:36",
 			"moveOutDate": "2019-01-09 20:23:01",
 			"streetAddress": "3rd Ave",
-			"V1A1B4"
+			"postalCode": "V1A1B4"
 		}, {
 			"hid": 103,
 			"moveInDate": "2018-02-28 8:45:23",
 			"moveOutDate": "2018-09-19 10:20:17",
 			"streetAddress": "4th Ave",
-			"V1A1B5"
+			"postalCode": "V1A1B5"
 		}, {
 			"hid": 104,
 			"moveInDate": "2018-09-19 08:12:39",
 			"moveOutDate": "2019-01-01 11:00:12",
 			"streetAddress": "5th Ave",
-			"V1A1B7"
+			"postalCode": "V1A1B7"
 		}]
 	},
 	"Housing": {

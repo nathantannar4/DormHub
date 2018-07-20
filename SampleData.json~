@@ -187,7 +187,7 @@
 				"pid": 2,
 				"hid": 101,
 				"streetAddress": "2nd Ave",
-				"postalCode": "V1A1B3
+				"postalCode": "V1A1B3"
 			}, {
 				"pid": 3,
 				"hid": 102,
@@ -242,7 +242,7 @@
 			"reviewerPID": 4,
 			"revieweePID": 9,
 			"rating": 3,
-			"comment": NULL,
+			"comment": null,
 			"createdOn": "2018-09-19 7:37:23"
 		}]
 	},
