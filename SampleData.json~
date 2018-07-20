@@ -327,10 +327,10 @@
 			"price" : 200.00,
 			"squareFootage": 1500,
 			"roomsAvailable": 5,
-			"accomodations": "Couches",
+			"accomodations": "Couches, beds, dish washer and oven",
 			"landlordID": 7,
-			"createdOnDate": "2018-01-01 11:56:14",
-			"updatedOnDate": "2018-01-01 13:23:53"
+			"createdOnDate": "2018-03-21 10:06:22",
+			"updatedOnDate": "2018-10-11 23:25:26"
 		},	{
 			"streetAddress": "3rd Ave",
 			"postalCode": "V1A3B4",
@@ -339,10 +339,10 @@
 			"price" : 800,
 			"squareFootage": 1200,
 			"roomsAvailable": 3,
-			"accomodations": "Beds",
+			"accomodations": "Beds, few TVs",
 			"landlordID": 8,
-			"createdOnDate": "2018-01-01 11:56:14",
-			"updatedOnDate": "2018-01-01 13:23:53"
+			"createdOnDate": "2018-01-01 22:26:19",
+			"updatedOnDate": "2018-11-21 17:00:43"
 		},	{
 			"streetAddress": "4th Ave",	
 			"postalCode": "V1A3B5",
@@ -352,9 +352,9 @@
 			"squareFootage": 800,
 			"roomsAvailable": 2,
 			"accomodations": "Beds",
-			"landlordID": 9
-			"createdOnDate": "2018-01-01 11:56:14",
-			"updatedOnDate": "2018-01-01 13:23:53"
+			"landlordID": 9,
+			"createdOnDate": "2018-02-29 12:12:56",
+			"updatedOnDate": "2018-09-24 08:53:01"
 		},	{
 			"streetAddress": "5th Ave",
 			"postalCode": "V1A1B7",
@@ -365,8 +365,8 @@
 			"roomsAvailable": 2,
 			"accomodations": "Beds",
 			"landlordID": 10,
-			"createdOnDate": "2018-01-01 11:56:14",
-			"updatedOnDate": "2018-01-01 13:23:53"
+			"createdOnDate": "2018-02-05 11:56:14",
+			"updatedOnDate": "2018-02-09 18:31:13"
 		}]
 	}
 }
