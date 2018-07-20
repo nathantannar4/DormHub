@@ -173,5 +173,200 @@
             "companyName": "Gabspot",
             "companyAddress": "54372 Jackson Crossing"
           }]
-    }
+    },
+    "Occupies": {
+    	"SQL": {
+	    		"create": "CREATE TABLE Occupies(pid INTEGER, hid INTEGER, streetAddress CHAR(30), postalCode CHAR(6), PRIMARY KEY(pid, hid, streetAddress, postalCode), FOREIGN KEY(streetAddress, postalCode) REFERENCES Housing(streetAddress, postalCode) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY(pid) REFERENCES Seeker(pid) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY(hid) REFERENCES HistoryRecords(HID) ON DELETE CASCADE ON UPDATE CASCADE)"
+    		},
+    		"data": [{
+				"pid": 1,
+				"hid": 100,
+				"streetAddress": "1st Ave",
+				"postalCode": "V1A1B2"
+			}, {
+				"pid": 2,
+				"hid": 101,
+				"streetAddress": "2nd Ave",
+				"postalCode": "V1A1B3
+			}, {
+				"pid": 3,
+				"hid": 102,
+				"streetAddress": "3rd Ave",
+				"postalCode": "V1A1B4"
+			}, {
+				"pid": 4,
+				"hid": 103,
+				"streetAddress": "4th Ave",
+				"postalCode": "V1A1B5"
+			}, {
+				"pid": 5,
+				"hid": 104,
+				"streetAddress": "5th Ave",
+				"postalCode": "V1A1B7"
+			}]
+	},
+	"Review": {
+	"SQL": {
+			"create": "CREATE TABLE Review(rid INTEGER PRIMARY KEY, revieweePID INTEGER NOT NULL, revreviewerPID INTEGER NOT NULL, rating REAL, comment CHAR(140), createdOn DATE, FOREIGN KEY(reviewerPID) REFERENCES Person(pid) ON DELETE NO ACTION ON UPDATE CASCADE, FOREIGN KEY(revieweePID) REFERENCES Person(pid) ON DELETE NO ACTION ON UPDATE CASCADE)"
+		},
+		"data": [{
+			"rid": 1,
+			"reviewerPID": 6,
+			"revieweePID": 1,
+			"rating": 4.5,
+			"comment": "Pretty good",
+			"createdOn": "2019-01-01 12:30:57"
+		}, {
+			"rid": 2,
+			"reviewerPID": 1,
+			"revieweePID": 2,
+			"rating": 3.5,
+			"comment": "Mediocre",
+			"createdOn": "2018-03-01 11:56:52"
+		}, {
+			"rid": 3,
+			"reviewerPID": 2,
+			"revieweePID": 7,
+			"rating": 1,
+			"comment": "THE ABSOLUTE WORST",
+			"createdOn": "2018-12-27 23:39:04"
+		}, {
+			"rid": 4,
+			"reviewerPID": 8,
+			"revieweePID": 3,
+			"rating": 5,
+			"comment": "Excellent",
+			"createdOn": "2019-02-28 17:19:24"
+		}, {
+			"rid": 5,
+			"reviewerPID": 4,
+			"revieweePID": 9,
+			"rating": 3,
+			"comment": NULL,
+			"createdOn": "2018-09-19 7:37:23"
+		}]
+	},
+	"Past": {
+	"SQL": {
+			"create": "CREATE TABLE Past(current INTEGER PRIMARY KEY, previous INTEGER, FOREIGN KEY(current) REFERENCES History(hid) ON DELETE NO ACTION ON UPDATE CASCADE, FOREIGN KEY(previous) REFERENCES History(hid) ON DELETE NO ACTION ON UPDATE CASCADE)"
+		},
+		"data": [{
+			"current": 6,
+			"previous": 5
+		}, {
+			"current": 7,
+			"previous": 4
+		}, {
+			"current": 8,
+			"previous": 3
+		}, {
+			"current": 9,
+			"previous": 2
+		}, {
+			"current": 10,
+			"previous": 1
+		}]	
+	},
+	"HistoryRecords": {
+	"SQL": {
+		"create": "CREATE TABLE HistoryRecords( hid INTEGER PRIMARY KEY, moveInDate DATE, moveOutDate DATE, streetAddress CHAR(30) NOT NULL, postalCode CHAR(6) NOT NULL, FOREIGN KEY(streetAddress, postalCode) REFERENCES Housing(streetAddress, postalCode) ON DELETE NO ACTION ON UPDATE CASCADE)"
+		},
+		"data": [{
+			"hid": 100,
+			"moveInDate": "2018-01-01 08:12:39",
+			"moveOutDate": "2018-01-09 11:00:12",
+			"streetAddress": "1st Ave",
+			"V1A1B2"
+		}, {
+			"hid": 101,
+			"moveInDate": "2018-03-01 12:07:12",
+			"moveOutDate": "2018-12-27 13:59:15",
+			"streetAddress": "2nd Ave",
+			"V1A1B3"
+		}, {
+			"hid": 102,
+			"moveInDate": "2018-12-27 09:56:36",
+			"moveOutDate": "2019-01-09 20:23:01",
+			"streetAddress": "3rd Ave",
+			"V1A1B4"
+		}, {
+			"hid": 103,
+			"moveInDate": "2018-02-28 8:45:23",
+			"moveOutDate": "2018-09-19 10:20:17",
+			"streetAddress": "4th Ave",
+			"V1A1B5"
+		}, {
+			"hid": 104,
+			"moveInDate": "2018-09-19 08:12:39",
+			"moveOutDate": "2019-01-01 11:00:12",
+			"streetAddress": "5th Ave",
+			"V1A1B7"
+		}]
+	},
+	"Housing": {
+	"SQL": {
+		"create": "CREATE TABLE Housing(streetAddress CHAR(30), postalCode CHAR(6), city CHAR(30) NOT NULL, postTitle CHAR(30), price REAL, squareFootage INTEGER, roomsAvailable INTEGER, accomodations CHAR(140), createdOn DATE, updatedOn DATE, landlordPID INTEGER NOT NULL, PRIMARY KEY(address, postalCode), FOREIGN KEY(city) REFERENCES Location(city) ON DELETE NO ACTION FOREIGN KEY(landlordPID) REFERENCES Landlord(pid) ON DELETE NO ACTION ON UPDATE CASCADE)"
+		},
+		"data": [{
+			"streetAddress": "1st Ave",
+			"postalCode": "V1A1B2",
+			"city": "Vancouver",
+			"postTitle": "Posting1",
+			"price": 1450.00,
+			"squareFootage": 1000,
+			"roomsAvailable": 4,
+			"accomodations": "Beds, chairs, oven",
+			"landlordID": 6,
+			"createdOnDate": "2018-01-01 11:56:14",
+			"updatedOnDate": "2018-01-01 13:23:53"
+		},	{
+			"streetAddress": "2nd Ave",
+			"postalCode": "V1A2B3", 
+			"city": "Richmond",
+			"postTitle": "Posting2",
+			"price" : 200.00,
+			"squareFootage": 1500
+			"roomsAvailable": 5
+			"accomodations": "Couches",
+			"landlordID": 7
+			"createdOnDate": "2018-01-01 11:56:14",
+			"updatedOnDate": "2018-01-01 13:23:53"
+		},	{
+			"streetAddress": "3rd Ave",
+			"postalCode": "V1A3B4",
+			"city": "Burnaby",
+			"postTitle": "Posting3",
+			"price" : 800,
+			"squareFootage": 1200,
+			"roomsAvailable": 3,
+			"accomodations": "Beds",
+			"landlordID": 8,
+			"createdOnDate": "2018-01-01 11:56:14",
+			"updatedOnDate": "2018-01-01 13:23:53"
+		},	{
+			"streetAddress": "4th Ave",	
+			"postalCode": "V1A3B5",
+			"city": "Surrey",
+			"postTitle": "Posting4",
+			"price" : 1337.00
+			"squareFootage": 800
+			"roomsAvailable": 2
+			"accomodations": "Beds"
+			"landlordID": 9
+			"createdOnDate": "2018-01-01 11:56:14",
+			"updatedOnDate": "2018-01-01 13:23:53"
+		},	{
+			"streetAddress": "5th Ave",
+			"postalCode": "V1A1B7",
+			"city": "Victoria",
+			"postTitle": "Posting5",
+			"price" : 420.00,
+			"squareFootage": 500,
+			"roomsAvailable": 2,
+			"accomodations": "Beds",
+			"landlordID": 10,
+			"createdOnDate": "2018-01-01 11:56:14",
+			"updatedOnDate": "2018-01-01 13:23:53"
+		}]
+	}
 }
