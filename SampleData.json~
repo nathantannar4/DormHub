@@ -174,37 +174,6 @@
             "companyAddress": "54372 Jackson Crossing"
           }]
     },
-    "Occupies": {
-    	"SQL": {
-	    		"create": "CREATE TABLE Occupies(pid INTEGER, hid INTEGER, streetAddress CHAR(30), postalCode CHAR(6), PRIMARY KEY(pid, hid, streetAddress, postalCode), FOREIGN KEY(streetAddress, postalCode) REFERENCES Housing(streetAddress, postalCode) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY(pid) REFERENCES Seeker(pid) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY(hid) REFERENCES HistoryRecords(HID) ON DELETE CASCADE ON UPDATE CASCADE)"
-    		},
-    		"data": [{
-				"pid": 1,
-				"hid": 100,
-				"streetAddress": "1st Ave",
-				"postalCode": "V1A1B2"
-			}, {
-				"pid": 2,
-				"hid": 101,
-				"streetAddress": "2nd Ave",
-				"postalCode": "V1A1B3"
-			}, {
-				"pid": 3,
-				"hid": 102,
-				"streetAddress": "3rd Ave",
-				"postalCode": "V1A1B4"
-			}, {
-				"pid": 4,
-				"hid": 103,
-				"streetAddress": "4th Ave",
-				"postalCode": "V1A1B5"
-			}, {
-				"pid": 5,
-				"hid": 104,
-				"streetAddress": "5th Ave",
-				"postalCode": "V1A1B7"
-			}]
-	},
 	"Review": {
 	"SQL": {
 			"create": "CREATE TABLE Review(rid INTEGER PRIMARY KEY, revieweePID INTEGER NOT NULL, revreviewerPID INTEGER NOT NULL, rating REAL, comment CHAR(140), createdOn DATE, FOREIGN KEY(reviewerPID) REFERENCES Person(pid) ON DELETE NO ACTION ON UPDATE CASCADE, FOREIGN KEY(revieweePID) REFERENCES Person(pid) ON DELETE NO ACTION ON UPDATE CASCADE)"
@@ -244,63 +213,6 @@
 			"rating": 3,
 			"comment": null,
 			"createdOn": "2018-09-19 7:37:23"
-		}]
-	},
-	"Past": {
-	"SQL": {
-			"create": "CREATE TABLE Past(current INTEGER PRIMARY KEY, previous INTEGER, FOREIGN KEY(current) REFERENCES History(hid) ON DELETE NO ACTION ON UPDATE CASCADE, FOREIGN KEY(previous) REFERENCES History(hid) ON DELETE NO ACTION ON UPDATE CASCADE)"
-		},
-		"data": [{
-			"current": 6,
-			"previous": 5
-		}, {
-			"current": 7,
-			"previous": 4
-		}, {
-			"current": 8,
-			"previous": 3
-		}, {
-			"current": 9,
-			"previous": 2
-		}, {
-			"current": 10,
-			"previous": 1
-		}]	
-	},
-	"HistoryRecords": {
-	"SQL": {
-		"create": "CREATE TABLE HistoryRecords( hid INTEGER PRIMARY KEY, moveInDate DATE, moveOutDate DATE, streetAddress CHAR(30) NOT NULL, postalCode CHAR(6) NOT NULL, FOREIGN KEY(streetAddress, postalCode) REFERENCES Housing(streetAddress, postalCode) ON DELETE NO ACTION ON UPDATE CASCADE)"
-		},
-		"data": [{
-			"hid": 100,
-			"moveInDate": "2018-01-01 08:12:39",
-			"moveOutDate": "2018-01-09 11:00:12",
-			"streetAddress": "1st Ave",
-			"postalCode": "V1A1B2"
-		}, {
-			"hid": 101,
-			"moveInDate": "2018-03-01 12:07:12",
-			"moveOutDate": "2018-12-27 13:59:15",
-			"streetAddress": "2nd Ave",
-			"postalCode": "V1A1B3"
-		}, {
-			"hid": 102,
-			"moveInDate": "2018-12-27 09:56:36",
-			"moveOutDate": "2019-01-09 20:23:01",
-			"streetAddress": "3rd Ave",
-			"postalCode": "V1A1B4"
-		}, {
-			"hid": 103,
-			"moveInDate": "2018-02-28 8:45:23",
-			"moveOutDate": "2018-09-19 10:20:17",
-			"streetAddress": "4th Ave",
-			"postalCode": "V1A1B5"
-		}, {
-			"hid": 104,
-			"moveInDate": "2018-09-19 08:12:39",
-			"moveOutDate": "2019-01-01 11:00:12",
-			"streetAddress": "5th Ave",
-			"postalCode": "V1A1B7"
 		}]
 	},
 	"Housing": {
@@ -368,5 +280,93 @@
 			"createdOnDate": "2018-02-05 11:56:14",
 			"updatedOnDate": "2018-02-09 18:31:13"
 		}]
+	},
+	"History": {
+	"SQL": {
+		"create": "CREATE TABLE History( hid INTEGER PRIMARY KEY, moveInDate DATE, moveOutDate DATE, streetAddress CHAR(30) NOT NULL, postalCode CHAR(6) NOT NULL, FOREIGN KEY(streetAddress, postalCode) REFERENCES Housing(streetAddress, postalCode) ON DELETE NO ACTION ON UPDATE CASCADE)"
+		},
+		"data": [{
+			"hid": 100,
+			"moveInDate": "2018-01-01 08:12:39",
+			"moveOutDate": "2018-01-09 11:00:12",
+			"streetAddress": "1st Ave",
+			"postalCode": "V1A1B2"
+		}, {
+			"hid": 101,
+			"moveInDate": "2018-03-01 12:07:12",
+			"moveOutDate": "2018-12-27 13:59:15",
+			"streetAddress": "2nd Ave",
+			"postalCode": "V1A1B3"
+		}, {
+			"hid": 102,
+			"moveInDate": "2018-12-27 09:56:36",
+			"moveOutDate": "2019-01-09 20:23:01",
+			"streetAddress": "3rd Ave",
+			"postalCode": "V1A1B4"
+		}, {
+			"hid": 103,
+			"moveInDate": "2018-02-28 8:45:23",
+			"moveOutDate": "2018-09-19 10:20:17",
+			"streetAddress": "4th Ave",
+			"postalCode": "V1A1B5"
+		}, {
+			"hid": 104,
+			"moveInDate": "2018-09-19 08:12:39",
+			"moveOutDate": "2019-01-01 11:00:12",
+			"streetAddress": "5th Ave",
+			"postalCode": "V1A1B7"
+		}]
+	},
+   "Occupies": {
+    	"SQL": {
+	    		"create": "CREATE TABLE Occupies(pid INTEGER, hid INTEGER, streetAddress CHAR(30), postalCode CHAR(6), PRIMARY KEY(pid, hid, streetAddress, postalCode), FOREIGN KEY(streetAddress, postalCode) REFERENCES Housing(streetAddress, postalCode) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY(pid) REFERENCES Seeker(pid) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY(hid) REFERENCES History(hid) ON DELETE CASCADE ON UPDATE CASCADE)"
+    		},
+    		"data": [{
+				"pid": 1,
+				"hid": 100,
+				"streetAddress": "1st Ave",
+				"postalCode": "V1A1B2"
+			}, {
+				"pid": 2,
+				"hid": 101,
+				"streetAddress": "2nd Ave",
+				"postalCode": "V1A1B3"
+			}, {
+				"pid": 3,
+				"hid": 102,
+				"streetAddress": "3rd Ave",
+				"postalCode": "V1A1B4"
+			}, {
+				"pid": 4,
+				"hid": 103,
+				"streetAddress": "4th Ave",
+				"postalCode": "V1A1B5"
+			}, {
+				"pid": 5,
+				"hid": 104,
+				"streetAddress": "5th Ave",
+				"postalCode": "V1A1B7"
+			}]
+	},
+	"Past": {
+	"SQL": {
+			"create": "CREATE TABLE Past(current INTEGER PRIMARY KEY, previous INTEGER, FOREIGN KEY(current) REFERENCES History(hid) ON UPDATE CASCADE, FOREIGN KEY(previous) REFERENCES History(hid) ON UPDATE CASCADE)"
+		},
+		"data": [{
+			"current": 6,
+			"previous": 5
+		}, {
+			"current": 7,
+			"previous": 4
+		}, {
+			"current": 8,
+			"previous": 3
+		}, {
+			"current": 9,
+			"previous": 2
+		}, {
+			"current": 10,
+			"previous": 1
+		}]	
 	}
 }

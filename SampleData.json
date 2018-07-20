@@ -350,23 +350,23 @@
 	},
 	"Past": {
 	"SQL": {
-			"create": "CREATE TABLE Past(current INTEGER PRIMARY KEY, previous INTEGER, FOREIGN KEY(current) REFERENCES History(hid) ON DELETE NO ACTION ON UPDATE CASCADE, FOREIGN KEY(previous) REFERENCES History(hid) ON DELETE NO ACTION ON UPDATE CASCADE)"
+			"create": "CREATE TABLE Past(current INTEGER PRIMARY KEY, previous INTEGER, FOREIGN KEY(current) REFERENCES History(hid) ON UPDATE CASCADE, FOREIGN KEY(previous) REFERENCES History(hid) ON UPDATE CASCADE)"
 		},
 		"data": [{
-			"current": 6,
-			"previous": 5
+			"current": 101,
+			"previous": 100
 		}, {
-			"current": 7,
-			"previous": 4
+			"current": 103,
+			"previous": 100
 		}, {
-			"current": 8,
-			"previous": 3
+			"current": 104,
+			"previous": 102
 		}, {
-			"current": 9,
-			"previous": 2
+			"current": 104,
+			"previous": 103
 		}, {
-			"current": 10,
-			"previous": 1
+			"current": 102,
+			"previous": 101
 		}]	
 	}
 }
