@@ -321,7 +321,7 @@
 			"updatedOnDate": "2018-01-01 13:23:53"
 		},	{
 			"streetAddress": "2nd Ave",
-			"postalCode": "V1A2B3", 
+			"postalCode": "V1A1B3", 
 			"city": "Richmond",
 			"postTitle": "Posting2",
 			"price" : 200.00,
@@ -333,7 +333,7 @@
 			"updatedOnDate": "2018-10-11 23:25:26"
 		},	{
 			"streetAddress": "3rd Ave",
-			"postalCode": "V1A3B4",
+			"postalCode": "V1A1B4",
 			"city": "Burnaby",
 			"postTitle": "Posting3",
 			"price" : 800,
@@ -345,7 +345,7 @@
 			"updatedOnDate": "2018-11-21 17:00:43"
 		},	{
 			"streetAddress": "4th Ave",	
-			"postalCode": "V1A3B5",
+			"postalCode": "V1A1B5",
 			"city": "Surrey",
 			"postTitle": "Posting4",
 			"price" : 1337.00,
