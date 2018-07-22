@@ -1,372 +1,432 @@
 {
-    "Person": {
-        "SQL": {
-            "create": "CREATE TABLE Person(id INTEGER PRIMARY KEY, name VARCHAR(30), gender VARCHAR(10), phoneNumber VARCHAR(10), signUpDate DATE)"
-        },
-        "data": [{
-            "id": 1,
-            "name": "Cthrine Pimmocke",
-            "gender": "Female",
-            "phoneNumber": "8612143446",
-            "signUpDate": "2018-05-06 20:29:51"
-          }, {
-            "id": 2,
-            "name": "Corey Knotte",
-            "gender": "Male",
-            "phoneNumber": "9149674110",
-            "signUpDate": "2017-11-04 01:34:58"
-          }, {
-            "id": 3,
-            "name": "Genny Sparkwill",
-            "gender": "Female",
-            "phoneNumber": "8217941262",
-            "signUpDate": "2018-01-11 05:08:59"
-          }, {
-            "id": 4,
-            "name": "Jillene MacCumeskey",
-            "gender": "Female",
-            "phoneNumber": "2209135621",
-            "signUpDate": "2018-02-09 20:44:28"
-          }, {
-            "id": 5,
-            "name": "Brian Goodman",
-            "gender": "Male",
-            "phoneNumber": "9984029662",
-            "signUpDate": "2018-05-13 16:14:19"
-          }, {
-            "id": 6,
-            "name": "Karlan Topper",
-            "gender": "Male",
-            "phoneNumber": "0572867700",
-            "signUpDate": "2018-03-06 04:01:20"
-          }, {
-            "id": 7,
-            "name": "Donn Gingell",
-            "gender": "Male",
-            "phoneNumber": "7911785031",
-            "signUpDate": "2017-07-03 06:04:12"
-          }, {
-            "id": 8,
-            "name": "Ronalda Alexandersen",
-            "gender": "Female",
-            "phoneNumber": "9797205630",
-            "signUpDate": "2018-01-19 01:25:02"
-          }, {
-            "id": 9,
-            "name": "Michele Emmatt",
-            "gender": "Male",
-            "phoneNumber": "4183214971",
-            "signUpDate": "2017-12-25 17:23:54"
-          }, {
-            "id": 10,
-            "name": "Darryl Itzakovitz",
-            "gender": "Male",
-            "phoneNumber": "7573743424",
-            "signUpDate": "2017-08-19 14:00:17"
-          }]
-    },
-    "Seeker": {
-        "SQL": {
-            "create": "CREATE TABLE Seeker(pid INTEGER PRIMARY KEY, FOREIGN KEY(pid) REFERENCES Person(id) ON UPDATE CASCADE ON DELETE CASCADE)"
-        },
-        "data": [{
-            "pid": 1
-          }, {
-            "pid": 2
-          }, {
-            "pid": 3
-          }, {
-            "pid": 4
-          }, {
-            "pid": 5
-          }]
-    },
-    "Landlord": {
-        "SQL": {
-            "create": "CREATE TABLE Landlord(pid INTEGER PRIMARY KEY, FOREIGN KEY(pid) REFERENCES Person(id) ON UPDATE CASCADE ON DELETE CASCADE)"
-        },
-        "data": [{
-            "pid": 6
-          }, {
-            "pid": 7
-          }, {
-            "pid": 8
-          }, {
-            "pid": 9
-          }, {
-            "pid": 10
-          }]
-    },
-    "Location": {
-        "SQL": {
-            "create": "CREATE TABLE Location(city VARCHAR(50) PRIMARY KEY, transportation VARCHAR(255), stores VARCHAR(255), entertainment CHAR(255), crimeRate REAL)"
-        },
-        "data": [{
-            "city": "Madison",
-            "transportation": "Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.",
-            "stores": "Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.",
-            "entertainment": "Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.",
-            "crimeRate": 26.96
-          }, {
-            "city": "Marumori",
-            "transportation": "Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.",
-            "stores": "Fusce consequat. Nulla nisl. Nunc nisl.",
-            "entertainment": "Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
-            "crimeRate": 14.94
-          }, {
-            "city": "La Libertad",
-            "transportation": "Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.",
-            "stores": "In congue. Etiam justo. Etiam pretium iaculis justo.",
-            "entertainment": "Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.",
-            "crimeRate": 4.69
-          }, {
-            "city": "Tanjay",
-            "transportation": "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",
-            "stores": "Fusce consequat. Nulla nisl. Nunc nisl.",
-            "entertainment": "In congue. Etiam justo. Etiam pretium iaculis justo.",
-            "crimeRate": 10.62
-          }, {
-            "city": "Kupahandap",
-            "transportation": "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.",
-            "stores": "Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.",
-            "entertainment": "Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.",
-            "crimeRate": 29.76
-          }]
-    },
-    "Occupation": {
-        "SQL": {
-            "create": "CREATE TABLE Occupation(id INTEGER, pid INTEGER, placeOfStudy VARCHAR(140), title VARCHAR(30), companyName VARCHAR(30), companyAddress VARCHAR(35), PRIMARY KEY (id, pid), FOREIGN KEY(pid) REFERENCES Person(id) ON DELETE CASCADE ON UPDATE CASCADE)"
-        },
-        "data": [{
-            "id": 1,
-            "pid": 1,
-            "placeOfStudy": "Alvarães University",
-            "title": "Web Designer III",
-            "companyName": "Jetpulse",
-            "companyAddress": "73320 Johnson Avenue"
-          }, {
-            "id": 2,
-            "pid": 2,
-            "placeOfStudy": "Toledo University",
-            "title": "Project Manager",
-            "companyName": "Eamia",
-            "companyAddress": "87 Barnett Drive"
-          }, {
-            "id": 3,
-            "pid": 3,
-            "placeOfStudy": "Charleville-Mézières University",
-            "title": "Office Assistant II",
-            "companyName": "Muxo",
-            "companyAddress": "46 New Castle Pass"
-          }, {
-            "id": 4,
-            "pid": 4,
-            "placeOfStudy": "Krajan Gebangan University",
-            "title": "Food Chemist",
-            "companyName": "Brightdog",
-            "companyAddress": "56 Twin Pines Crossing"
-          }, {
-            "id": 5,
-            "pid": 5,
-            "placeOfStudy": "Peteranec University",
-            "title": "VP Quality Control",
-            "companyName": "Gabspot",
-            "companyAddress": "54372 Jackson Crossing"
-          }]
-    },
-	"Review": {
-	"SQL": {
-			"create": "CREATE TABLE Review(rid INTEGER PRIMARY KEY, revieweePID INTEGER NOT NULL, revreviewerPID INTEGER NOT NULL, rating REAL, comment CHAR(140), createdOn DATE, FOREIGN KEY(reviewerPID) REFERENCES Person(pid) ON DELETE NO ACTION ON UPDATE CASCADE, FOREIGN KEY(revieweePID) REFERENCES Person(pid) ON DELETE NO ACTION ON UPDATE CASCADE)"
+	"Person": {
+		"SQL": {
+			"create": "CREATE TABLE Person(id INTEGER PRIMARY KEY, name VARCHAR(30), gender VARCHAR(10), phoneNumber VARCHAR(10), signUpDate DATE)"
 		},
-		"data": [{
-			"rid": 1,
-			"reviewerPID": 6,
-			"revieweePID": 1,
-			"rating": 4.5,
-			"comment": "Pretty good",
-			"createdOn": "2019-01-01 12:30:57"
-		}, {
-			"rid": 2,
-			"reviewerPID": 1,
-			"revieweePID": 2,
-			"rating": 3.5,
-			"comment": "Mediocre",
-			"createdOn": "2018-03-01 11:56:52"
-		}, {
-			"rid": 3,
-			"reviewerPID": 2,
-			"revieweePID": 7,
-			"rating": 1,
-			"comment": "THE ABSOLUTE WORST",
-			"createdOn": "2018-12-27 23:39:04"
-		}, {
-			"rid": 4,
-			"reviewerPID": 8,
-			"revieweePID": 3,
-			"rating": 5,
-			"comment": "Excellent",
-			"createdOn": "2019-02-28 17:19:24"
-		}, {
-			"rid": 5,
-			"reviewerPID": 4,
-			"revieweePID": 9,
-			"rating": 3,
-			"comment": null,
-			"createdOn": "2018-09-19 7:37:23"
-		}]
+		"data": [
+			{
+				"id": 1,
+				"name": "Cthrine Pimmocke",
+				"gender": "Female",
+				"phoneNumber": "8612143446",
+				"signUpDate": "2018-05-06 20:29:51"
+			},
+			{
+				"id": 2,
+				"name": "Corey Knotte",
+				"gender": "Male",
+				"phoneNumber": "9149674110",
+				"signUpDate": "2017-11-04 01:34:58"
+			},
+			{
+				"id": 3,
+				"name": "Genny Sparkwill",
+				"gender": "Female",
+				"phoneNumber": "8217941262",
+				"signUpDate": "2018-01-11 05:08:59"
+			},
+			{
+				"id": 4,
+				"name": "Jillene MacCumeskey",
+				"gender": "Female",
+				"phoneNumber": "2209135621",
+				"signUpDate": "2018-02-09 20:44:28"
+			},
+			{
+				"id": 5,
+				"name": "Brian Goodman",
+				"gender": "Male",
+				"phoneNumber": "9984029662",
+				"signUpDate": "2018-05-13 16:14:19"
+			},
+			{
+				"id": 6,
+				"name": "Karlan Topper",
+				"gender": "Male",
+				"phoneNumber": "0572867700",
+				"signUpDate": "2018-03-06 04:01:20"
+			},
+			{
+				"id": 7,
+				"name": "Donn Gingell",
+				"gender": "Male",
+				"phoneNumber": "7911785031",
+				"signUpDate": "2017-07-03 06:04:12"
+			},
+			{
+				"id": 8,
+				"name": "Ronalda Alexandersen",
+				"gender": "Female",
+				"phoneNumber": "9797205630",
+				"signUpDate": "2018-01-19 01:25:02"
+			},
+			{
+				"id": 9,
+				"name": "Michele Emmatt",
+				"gender": "Male",
+				"phoneNumber": "4183214971",
+				"signUpDate": "2017-12-25 17:23:54"
+			},
+			{
+				"id": 10,
+				"name": "Darryl Itzakovitz",
+				"gender": "Male",
+				"phoneNumber": "7573743424",
+				"signUpDate": "2017-08-19 14:00:17"
+			}
+		]
+	},
+	"Seeker": {
+		"SQL": {
+			"create": "CREATE TABLE Seeker(pid INTEGER PRIMARY KEY, FOREIGN KEY(pid) REFERENCES Person(id) ON UPDATE CASCADE ON DELETE CASCADE)"
+		},
+		"data": [
+			{
+				"pid": 1
+			},
+			{
+				"pid": 2
+			},
+			{
+				"pid": 3
+			},
+			{
+				"pid": 4
+			},
+			{
+				"pid": 5
+			}
+		]
+	},
+	"Landlord": {
+		"SQL": {
+			"create": "CREATE TABLE Landlord(pid INTEGER PRIMARY KEY, FOREIGN KEY(pid) REFERENCES Person(id) ON UPDATE CASCADE ON DELETE CASCADE)"
+		},
+		"data": [
+			{
+				"pid": 6
+			},
+			{
+				"pid": 7
+			},
+			{
+				"pid": 8
+			},
+			{
+				"pid": 9
+			},
+			{
+				"pid": 10
+			}
+		]
+	},
+	"Location": {
+		"SQL": {
+			"create": "CREATE TABLE Location(city VARCHAR(50) PRIMARY KEY, transportation VARCHAR(255), stores VARCHAR(255), entertainment CHAR(255), crimeRate REAL)"
+		},
+		"data": [
+			{
+				"city": "Vancouver",
+				"transportation": "Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.",
+				"stores": "Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.",
+				"entertainment": "Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.",
+				"crimeRate": 26.96
+			},
+			{
+				"city": "Richmond",
+				"transportation": "Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.",
+				"stores": "Fusce consequat. Nulla nisl. Nunc nisl.",
+				"entertainment": "Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
+				"crimeRate": 14.94
+			},
+			{
+				"city": "Burnaby",
+				"transportation": "Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.",
+				"stores": "In congue. Etiam justo. Etiam pretium iaculis justo.",
+				"entertainment": "Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.",
+				"crimeRate": 4.69
+			},
+			{
+				"city": "New Westminster",
+				"transportation": "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",
+				"stores": "Fusce consequat. Nulla nisl. Nunc nisl.",
+				"entertainment": "In congue. Etiam justo. Etiam pretium iaculis justo.",
+				"crimeRate": 10.62
+			},
+			{
+				"city": "Surrey",
+				"transportation": "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.",
+				"stores": "Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.",
+				"entertainment": "Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.",
+				"crimeRate": 29.76
+			}
+		]
+	},
+	"Occupation": {
+		"SQL": {
+			"create": "CREATE TABLE Occupation(pid INTEGER PRIMARY KEY, placeOfStudy VARCHAR(140), title VARCHAR(30), companyName VARCHAR(30), companyAddress VARCHAR(35), FOREIGN KEY(pid) REFERENCES Person(id) ON DELETE CASCADE ON UPDATE CASCADE)"
+		},
+		"data": [
+			{
+				"pid": 1,
+				"placeOfStudy": "Alvarães University",
+				"title": "Web Designer III",
+				"companyName": "Jetpulse",
+				"companyAddress": "73320 Johnson Avenue"
+			},
+			{
+				"pid": 2,
+				"placeOfStudy": "Toledo University",
+				"title": "Project Manager",
+				"companyName": "Eamia",
+				"companyAddress": "87 Barnett Drive"
+			},
+			{
+				"pid": 3,
+				"placeOfStudy": "Charleville-Mézières University",
+				"title": "Office Assistant II",
+				"companyName": "Muxo",
+				"companyAddress": "46 New Castle Pass"
+			},
+			{
+				"pid": 4,
+				"placeOfStudy": "Krajan Gebangan University",
+				"title": "Food Chemist",
+				"companyName": "Brightdog",
+				"companyAddress": "56 Twin Pines Crossing"
+			},
+			{
+				"pid": 5,
+				"placeOfStudy": "Peteranec University",
+				"title": "VP Quality Control",
+				"companyName": "Gabspot",
+				"companyAddress": "54372 Jackson Crossing"
+			}
+		]
+	},
+	"Review": {
+		"SQL": {
+			"create": "CREATE TABLE Review(rid INTEGER PRIMARY KEY, revieweePID INTEGER NOT NULL, reviewerPID INTEGER NOT NULL, rating REAL, comment CHAR(140), createdOn DATE, FOREIGN KEY(reviewerPID) REFERENCES Person(id) ON DELETE NO ACTION ON UPDATE CASCADE, FOREIGN KEY(revieweePID) REFERENCES Person(id) ON DELETE NO ACTION ON UPDATE CASCADE)"
+		},
+		"data": [
+			{
+				"rid": 1,
+				"reviewerPID": 6,
+				"revieweePID": 1,
+				"rating": 4.5,
+				"comment": "Pretty good",
+				"createdOn": "2019-01-01 12:30:57"
+			},
+			{
+				"rid": 2,
+				"reviewerPID": 1,
+				"revieweePID": 2,
+				"rating": 3.5,
+				"comment": "Mediocre",
+				"createdOn": "2018-03-01 11:56:52"
+			},
+			{
+				"rid": 3,
+				"reviewerPID": 2,
+				"revieweePID": 7,
+				"rating": 1,
+				"comment": "THE ABSOLUTE WORST",
+				"createdOn": "2018-12-27 23:39:04"
+			},
+			{
+				"rid": 4,
+				"reviewerPID": 8,
+				"revieweePID": 3,
+				"rating": 5,
+				"comment": "Excellent",
+				"createdOn": "2019-02-28 17:19:24"
+			},
+			{
+				"rid": 5,
+				"reviewerPID": 4,
+				"revieweePID": 9,
+				"rating": 3,
+				"comment": null,
+				"createdOn": "2018-09-19 7:37:23"
+			}
+		]
 	},
 	"Housing": {
-	"SQL": {
-		"create": "CREATE TABLE Housing(streetAddress CHAR(30), postalCode CHAR(6), city CHAR(30) NOT NULL, postTitle CHAR(30), price REAL, squareFootage INTEGER, roomsAvailable INTEGER, accomodations CHAR(140), createdOn DATE, updatedOn DATE, landlordPID INTEGER NOT NULL, PRIMARY KEY(address, postalCode), FOREIGN KEY(city) REFERENCES Location(city) ON DELETE NO ACTION FOREIGN KEY(landlordPID) REFERENCES Landlord(pid) ON DELETE NO ACTION ON UPDATE CASCADE)"
+		"SQL": {
+			"create": "CREATE TABLE Housing(streetAddress CHAR(30), postalCode CHAR(6), city CHAR(30) NOT NULL, postTitle CHAR(30), price REAL, squareFootage INTEGER, roomsAvailable INTEGER, accomodations CHAR(140), createdOn DATE, updatedOn DATE, landlordPID INTEGER, PRIMARY KEY(streetAddress, postalCode), FOREIGN KEY(city) REFERENCES Location(city) ON DELETE NO ACTION, FOREIGN KEY(landlordPID) REFERENCES Landlord(pid) ON DELETE SET NULL ON UPDATE CASCADE)"
 		},
-		"data": [{
-			"streetAddress": "1st Ave",
-			"postalCode": "V1A1B2",
-			"city": "Vancouver",
-			"postTitle": "Posting1",
-			"price": 1450.00,
-			"squareFootage": 1000,
-			"roomsAvailable": 4,
-			"accomodations": "Beds, chairs, oven",
-			"landlordID": 6,
-			"createdOnDate": "2018-01-01 11:56:14",
-			"updatedOnDate": "2018-01-01 13:23:53"
-		},	{
-			"streetAddress": "2nd Ave",
-			"postalCode": "V1A1B3", 
-			"city": "Richmond",
-			"postTitle": "Posting2",
-			"price" : 200.00,
-			"squareFootage": 1500,
-			"roomsAvailable": 5,
-			"accomodations": "Couches, beds, dish washer and oven",
-			"landlordID": 7,
-			"createdOnDate": "2018-03-21 10:06:22",
-			"updatedOnDate": "2018-10-11 23:25:26"
-		},	{
-			"streetAddress": "3rd Ave",
-			"postalCode": "V1A1B4",
-			"city": "Burnaby",
-			"postTitle": "Posting3",
-			"price" : 800,
-			"squareFootage": 1200,
-			"roomsAvailable": 3,
-			"accomodations": "Beds, few TVs",
-			"landlordID": 8,
-			"createdOnDate": "2018-01-01 22:26:19",
-			"updatedOnDate": "2018-11-21 17:00:43"
-		},	{
-			"streetAddress": "4th Ave",	
-			"postalCode": "V1A1B5",
-			"city": "Surrey",
-			"postTitle": "Posting4",
-			"price" : 1337.00,
-			"squareFootage": 800,
-			"roomsAvailable": 2,
-			"accomodations": "Beds",
-			"landlordID": 9,
-			"createdOnDate": "2018-02-29 12:12:56",
-			"updatedOnDate": "2018-09-24 08:53:01"
-		},	{
-			"streetAddress": "5th Ave",
-			"postalCode": "V1A1B7",
-			"city": "Victoria",
-			"postTitle": "Posting5",
-			"price" : 420.00,
-			"squareFootage": 500,
-			"roomsAvailable": 2,
-			"accomodations": "Beds",
-			"landlordID": 10,
-			"createdOnDate": "2018-02-05 11:56:14",
-			"updatedOnDate": "2018-02-09 18:31:13"
-		}]
+		"data": [
+			{
+				"streetAddress": "1st Ave",
+				"postalCode": "V1A1B1",
+				"city": "Vancouver",
+				"postTitle": "Posting1",
+				"price": 1450.00,
+				"squareFootage": 1000,
+				"roomsAvailable": 4,
+				"accomodations": "Beds, chairs, oven",
+				"landlordPID": 6,
+				"createdOn": "2018-01-01 11:56:14",
+				"updatedOn": "2018-01-01 13:23:53"
+			},
+			{
+				"streetAddress": "2nd Ave",
+				"postalCode": "V1A1B2",
+				"city": "Richmond",
+				"postTitle": "Posting2",
+				"price": 200.00,
+				"squareFootage": 1500,
+				"roomsAvailable": 5,
+				"accomodations": "Couches, beds, dish washer and oven",
+				"landlordPID": 7,
+				"createdOn": "2018-01-01 11:56:14",
+				"updatedOn": "2018-01-01 13:23:53"
+			},
+			{
+				"streetAddress": "3rd Ave",
+				"postalCode": "V1A1B3",
+				"city": "Burnaby",
+				"postTitle": "Posting3",
+				"price": 800,
+				"squareFootage": 1200,
+				"roomsAvailable": 3,
+				"accomodations": "Beds, few TVs",
+				"landlordPID": 8,
+				"createdOn": "2018-01-01 11:56:14",
+				"updatedOn": "2018-01-01 13:23:53"
+			},
+			{
+				"streetAddress": "4th Ave",
+				"postalCode": "V1A1B4",
+				"city": "Surrey",
+				"postTitle": "Posting4",
+				"price": 1337.00,
+				"squareFootage": 800,
+				"roomsAvailable": 2,
+				"accomodations": "Beds",
+				"landlordPID": 9,
+				"createdOn": "2018-01-01 11:56:14",
+				"updatedOn": "2018-01-01 13:23:53"
+			},
+			{
+				"streetAddress": "5th Ave",
+				"postalCode": "V1A1B5",
+				"city": "New Westminster",
+				"postTitle": "Posting5",
+				"price": 420.00,
+				"squareFootage": 500,
+				"roomsAvailable": 2,
+				"accomodations": "Beds",
+				"landlordPID": 10,
+				"createdOn": "2018-01-01 11:56:14",
+				"updatedOn": "2018-01-01 13:23:53"
+			}
+		]
 	},
 	"History": {
-	"SQL": {
-		"create": "CREATE TABLE History( hid INTEGER PRIMARY KEY, moveInDate DATE, moveOutDate DATE, streetAddress CHAR(30) NOT NULL, postalCode CHAR(6) NOT NULL, FOREIGN KEY(streetAddress, postalCode) REFERENCES Housing(streetAddress, postalCode) ON DELETE NO ACTION ON UPDATE CASCADE)"
+		"SQL": {
+			"create": "CREATE TABLE History(hid INTEGER PRIMARY KEY, moveInDate DATE, moveOutDate DATE, streetAddress CHAR(30) NOT NULL, postalCode CHAR(6) NOT NULL, FOREIGN KEY(streetAddress, postalCode) REFERENCES Housing(streetAddress, postalCode) ON DELETE CASCADE ON UPDATE CASCADE)"
 		},
-		"data": [{
-			"hid": 100,
-			"moveInDate": "2018-01-01 08:12:39",
-			"moveOutDate": "2018-01-09 11:00:12",
-			"streetAddress": "1st Ave",
-			"postalCode": "V1A1B2"
-		}, {
-			"hid": 101,
-			"moveInDate": "2018-03-01 12:07:12",
-			"moveOutDate": "2018-12-27 13:59:15",
-			"streetAddress": "2nd Ave",
-			"postalCode": "V1A1B3"
-		}, {
-			"hid": 102,
-			"moveInDate": "2018-12-27 09:56:36",
-			"moveOutDate": "2019-01-09 20:23:01",
-			"streetAddress": "3rd Ave",
-			"postalCode": "V1A1B4"
-		}, {
-			"hid": 103,
-			"moveInDate": "2018-02-28 8:45:23",
-			"moveOutDate": "2018-09-19 10:20:17",
-			"streetAddress": "4th Ave",
-			"postalCode": "V1A1B5"
-		}, {
-			"hid": 104,
-			"moveInDate": "2018-09-19 08:12:39",
-			"moveOutDate": "2019-01-01 11:00:12",
-			"streetAddress": "5th Ave",
-			"postalCode": "V1A1B7"
-		}]
+		"data": [
+			{
+				"hid": 100,
+				"moveInDate": "2018-01-01 08:12:39",
+				"moveOutDate": "2018-01-09 11:00:12",
+				"streetAddress": "1st Ave",
+				"postalCode": "V1A1B1"
+			},
+			{
+				"hid": 101,
+				"moveInDate": "2018-03-01 12:07:12",
+				"moveOutDate": "2018-12-27 13:59:15",
+				"streetAddress": "2nd Ave",
+				"postalCode": "V1A1B2"
+			},
+			{
+				"hid": 102,
+				"moveInDate": "2018-12-27 09:56:36",
+				"moveOutDate": "2019-01-09 20:23:01",
+				"streetAddress": "3rd Ave",
+				"postalCode": "V1A1B3"
+			},
+			{
+				"hid": 103,
+				"moveInDate": "2018-02-28 8:45:23",
+				"moveOutDate": "2018-09-19 10:20:17",
+				"streetAddress": "4th Ave",
+				"postalCode": "V1A1B4"
+			},
+			{
+				"hid": 104,
+				"moveInDate": "2018-09-19 08:12:39",
+				"moveOutDate": "2019-01-01 11:00:12",
+				"streetAddress": "5th Ave",
+				"postalCode": "V1A1B5"
+			}
+		]
 	},
-   "Occupies": {
-    	"SQL": {
-	    		"create": "CREATE TABLE Occupies(pid INTEGER, hid INTEGER, streetAddress CHAR(30), postalCode CHAR(6), PRIMARY KEY(pid, hid, streetAddress, postalCode), FOREIGN KEY(streetAddress, postalCode) REFERENCES Housing(streetAddress, postalCode) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY(pid) REFERENCES Seeker(pid) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY(hid) REFERENCES History(hid) ON DELETE CASCADE ON UPDATE CASCADE)"
-    		},
-    		"data": [{
+	"Occupies": {
+		"SQL": {
+			"create": "CREATE TABLE Occupies(pid INTEGER, hid INTEGER, streetAddress CHAR(30), postalCode CHAR(6), PRIMARY KEY(pid, hid), FOREIGN KEY(streetAddress, postalCode) REFERENCES Housing(streetAddress, postalCode) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY(pid) REFERENCES Seeker(pid) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY(hid) REFERENCES History(hid) ON DELETE CASCADE ON UPDATE CASCADE)"
+		},
+		"data": [
+			{
 				"pid": 1,
 				"hid": 100,
 				"streetAddress": "1st Ave",
-				"postalCode": "V1A1B2"
-			}, {
+				"postalCode": "V1A1B1"
+			},
+			{
 				"pid": 2,
 				"hid": 101,
 				"streetAddress": "2nd Ave",
-				"postalCode": "V1A1B3"
-			}, {
+				"postalCode": "V1A1B2"
+			},
+			{
 				"pid": 3,
 				"hid": 102,
 				"streetAddress": "3rd Ave",
-				"postalCode": "V1A1B4"
-			}, {
+				"postalCode": "V1A1B3"
+			},
+			{
 				"pid": 4,
 				"hid": 103,
 				"streetAddress": "4th Ave",
-				"postalCode": "V1A1B5"
-			}, {
+				"postalCode": "V1A1B4"
+			},
+			{
 				"pid": 5,
 				"hid": 104,
 				"streetAddress": "5th Ave",
-				"postalCode": "V1A1B7"
-			}]
+				"postalCode": "V1A1B5"
+			}
+		]
 	},
 	"Past": {
-	"SQL": {
-			"create": "CREATE TABLE Past(current INTEGER PRIMARY KEY, previous INTEGER, FOREIGN KEY(current) REFERENCES History(hid) ON UPDATE CASCADE, FOREIGN KEY(previous) REFERENCES History(hid) ON UPDATE CASCADE)"
+		"SQL": {
+			"create": "CREATE TABLE Past(current INTEGER PRIMARY KEY, previous INTEGER)"
 		},
-		"data": [{
-			"current": 101,
-			"previous": 100
-		}, {
-			"current": 103,
-			"previous": 100
-		}, {
-			"current": 104,
-			"previous": 102
-		}, {
-			"current": 104,
-			"previous": 103
-		}, {
-			"current": 102,
-			"previous": 101
-		}]	
+		"data": [
+			{
+				"current": 100,
+				"previous": null
+			},
+			{
+				"current": 101,
+				"previous": 100
+			},
+			{
+				"current": 102,
+				"previous": 101
+			},
+			{
+				"current": 103,
+				"previous": 102
+			},
+			{
+				"current": 104,
+				"previous": null
+			}
+		]
 	}
 }

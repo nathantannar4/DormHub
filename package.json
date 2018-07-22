@@ -17,7 +17,8 @@
     "exec-php": "0.0.4",
     "express": "^4.16.3",
     "mysql": "^2.15.0",
-    "nodemon": "^1.14.11"
+    "nodemon": "^1.14.11",
+    "promise-sequential": "^1.1.1"
   },
   "devDependencies": {
     "concurrently": "3.1.0",

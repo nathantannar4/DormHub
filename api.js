@@ -4,6 +4,7 @@ const mysql = require('mysql');
 const express = require("express");
 const bodyParser = require('body-parser');
 const childProcess = require('child_process');
+const sequential = require('promise-sequential');
 
 const HOST = process.env.HOST || 'localhost';
 const DB_USER = process.env.DB_NAME || 'root';
@@ -30,7 +31,6 @@ function getConnection() {
         pool.getConnection(function(error, connection) {
             if (error) {
                 connection.release();
-                console.log(error);
                 reject(error);
             } else {
                 resolve(connection);
@@ -39,29 +39,17 @@ function getConnection() {
     });
 }
 
-function queryDatabase(query, data) {
+function executeSQL(query, data) {
     return new Promise(function(resolve, reject) {
         getConnection().then((connection) => {
-            connection.query(query, data, function(error, rows, fields){
+            connection.on('error', (error) => reject(error))
+            connection.query(query, data, function(error, rows, fields) {
                 connection.release();
                 if (error) reject(error);
                 else resolve(rows, fields);
             });
-            // connection.on('error', function(error) {  
-            //     console.log(error);    
-            //     reject(error);
-            // });
-        }).catch((error) => {
-            console.log(error);
-            reject(error);
-        });
+        }).catch((error) => reject(error));
     });
-}
-
-function sequentiallyExecute(functions) {
-    return functions.reduce((promise, func) =>
-        promise.then(result => func().then(Array.prototype.concat.bind(result))),
-        Promise.resolve([]))
 }
 
 const concat = (x,y) => x.concat(y)
@@ -107,32 +95,25 @@ app.get("/populate", function(request, response) {
 
     if (tables.length == 0) return response.json({"code": 100, "status": "No data to populate database in `SampleData.json`"})
 
-    const dropTasks = tables.map(table => { 
-        return () => queryDatabase("DROP TABLE IF EXISTS " + table) 
-    });
-    const createTasks = tables.map(table => {
-        return () => queryDatabase(sampleData[table].SQL.create)
-    });
-    const dataTasks = tables.flatMap(table => {
-        return sampleData[table].data.map(record => {
-            return () => queryDatabase("INSERT INTO " + table + " SET ?", record)
-        })
-    });
+    const dropTasks = tables.map(table => () => executeSQL("DROP TABLE IF EXISTS " + table)).reverse();
+    const createTasks = tables.map(table => () => executeSQL(sampleData[table].SQL.create));
+    const insertTasks = tables.flatMap(table => () => sampleData[table].data.map(record =>  executeSQL("INSERT INTO " + table + " SET ?", record)));
+    
 
-    sequentiallyExecute(dropTasks)
-        .then(sequentiallyExecute(createTasks))
-        .then(sequentiallyExecute(dataTasks))
-        .then(() => {
+    sequential(dropTasks)
+        .then(() => sequential(createTasks))
+        .then(() => sequential(insertTasks))
+        .then(_ => {
             response.json({"code": 200, "status": "SQL Database populated with `SampleData.json`"})
         }).catch((error) => {
             response.json(error);
-    })
+        })
 })
 
 /// 1. Projection Query
 /// Query for all Persons 
 app.get("/persons", function(request, response) {
-    queryDatabase("SELECT * FROM Person")
+    executeSQL("SELECT * FROM Person")
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -143,7 +124,7 @@ app.get("/persons", function(request, response) {
 /// Query for Person with specified ID
 app.get("/person/:id", function(request, response) {
     const id = request.params.id
-    queryDatabase("SELECT * FROM Person WHERE id = " + id)
+    executeSQL("SELECT * FROM Person WHERE id = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -153,7 +134,7 @@ app.get("/person/:id", function(request, response) {
 
 /// Query for all Seekers 
 app.get("/seekers", function(request, response) {
-    queryDatabase("SELECT * FROM Seeker, Person WHERE Seeker.pid = Person.id")
+    executeSQL("SELECT * FROM Seeker, Person WHERE Seeker.pid = Person.id")
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -164,7 +145,7 @@ app.get("/seekers", function(request, response) {
 /// Query for Seeker with specified ID
 app.get("/seeker/:id", function(request, response) {
     const id = request.params.id
-    queryDatabase("SELECT * FROM Seeker, Person WHERE Seeker.pid = Person.id AND Seeker.pid = " + id)
+    executeSQL("SELECT * FROM Seeker, Person WHERE Seeker.pid = Person.id AND Seeker.pid = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -174,7 +155,7 @@ app.get("/seeker/:id", function(request, response) {
 
 /// Query for all Landlords 
 app.get("/landlords", function(request, response) {
-    queryDatabase("SELECT * FROM Landlord, Person WHERE Landlord.pid = Person.id")
+    executeSQL("SELECT * FROM Landlord, Person WHERE Landlord.pid = Person.id")
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -185,7 +166,7 @@ app.get("/landlords", function(request, response) {
 /// Query for Seeker with specified ID
 app.get("/landlord/:id", function(request, response) {
     const id = request.params.id
-    queryDatabase("SELECT * FROM Landlord, Person WHERE Landlord.pid = Person.id AND Seeker.pid = " + id)
+    executeSQL("SELECT * FROM Landlord, Person WHERE Landlord.pid = Person.id AND Seeker.pid = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -195,7 +176,7 @@ app.get("/landlord/:id", function(request, response) {
 
 /// Query for all Reviews
 app.get("/reviews", function(request, response) {
-    queryDatabase("SELECT * FROM Review")
+    executeSQL("SELECT * FROM Review")
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -206,7 +187,7 @@ app.get("/reviews", function(request, response) {
 /// Query for Review with specified ID
 app.get("/review/:id", function(request, response) {
     const id = request.params.id
-    queryDatabase("SELECT * FROM Review WHERE rid = " + id)
+    executeSQL("SELECT * FROM Review WHERE rid = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -218,7 +199,7 @@ app.get("/review/:id", function(request, response) {
 /// Delete a Review with specified ID
 app.delete("/review/:id", function(request, response) {
     const id = request.params.id
-    queryDatabase("DELETE Review WHERE rid = " + id)
+    executeSQL("DELETE Review WHERE rid = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -230,7 +211,7 @@ app.delete("/review/:id", function(request, response) {
 /// Query for Reviews on a user with a specified ID
 app.get("/reviews/:id", function(request, response) {
     const id = request.params.id
-    queryDatabase("SELECT * FROM Review r, Person p WHERE r.revieweePID = p.id AND p.id = " + id)
+    executeSQL("SELECT * FROM Review r, Person p WHERE r.revieweePID = p.id AND p.id = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -242,7 +223,7 @@ app.get("/reviews/:id", function(request, response) {
 /// Query for the Average Review score on a Person with a specified ID
 app.get("/averageReviewScore/:id", function(request, response) {
     const id = request.params.id
-    queryDatabase("SELECT p.id, p.name, avg(r.rating) FROM Review r, Person p WHERE r.revieweePID = p.id AND p.id = " + id)
+    executeSQL("SELECT p.id, p.name, avg(r.rating) FROM Review r, Person p WHERE r.revieweePID = p.id AND p.id = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -253,7 +234,7 @@ app.get("/averageReviewScore/:id", function(request, response) {
 /// 5. Nested aggregation
 /// Query for average review score for each Person
 app.get("/ratings", function(request, response) {
-    queryDatabase("SELECT p.id, p.name, p.gender, p.phoneNumber, p.signUpDate, avg(r.rating) FROM Review r, Person p WHERE r.revieweePID = p.id GROUP BY p.pid")
+    executeSQL("SELECT p.id, p.name, p.gender, p.phoneNumber, p.signUpDate, avg(r.rating) FROM Review r, Person p WHERE r.revieweePID = p.id GROUP BY p.pid")
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -264,7 +245,7 @@ app.get("/ratings", function(request, response) {
 /// 8. Division query
 /// Return Persons who have been reviewed by all other Persons
 app.get("/verifiedRatings", function(request, response) {
-    queryDatabase("SELECT * From Person p WHERE NOT EXISTS (SELECT * FROM Review r WHERE r.revieweePID = p.id)")
+    executeSQL("SELECT * From Person p WHERE NOT EXISTS (SELECT * FROM Review r WHERE r.revieweePID = p.id)")
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -274,7 +255,7 @@ app.get("/verifiedRatings", function(request, response) {
 
 /// Query for all Locations
 app.get("/locations", function(request, response) {
-    queryDatabase("SELECT * FROM Location")
+    executeSQL("SELECT * FROM Location")
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -285,7 +266,7 @@ app.get("/locations", function(request, response) {
 /// Query for all Location in specified city
 app.get("/location/:city", function(request, response) {
     const city = request.params.city;
-    queryDatabase("SELECT * FROM Location WHERE city = " + city)
+    executeSQL("SELECT * FROM Location WHERE city = " + city)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -310,7 +291,7 @@ app.get("/housing", function(request, response) {
 	} else {
 		return response.json({"error":"Undefined Query Parameters"});	
 	}
-    queryDatabase(sql)
+    executeSQL(sql)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -323,7 +304,7 @@ app.get("/housing", function(request, response) {
 app.post("/housing/:id/:price", function(request, response) {
     const id = request.params.id;
     const price = request.params.price;
-    queryDatabase("UPDATE Housing SET * price = " + price + " WHERE id = " + id)
+    executeSQL("UPDATE Housing SET * price = " + price + " WHERE id = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -337,5 +318,5 @@ app.post("/housing/:id/:price", function(request, response) {
 
 /// Start the app listening on port 3000
 app.listen(3001, function() {
-    console.log('> Listening at localhost:3000');
+    console.log('> DormHub API running at localhost:3001');
 });
