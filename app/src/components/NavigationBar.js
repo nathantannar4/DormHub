@@ -16,6 +16,7 @@ class NavigationBar extends Component {
           <NavLink to={`${process.env.PUBLIC_URL}/landlords`}>Landlords</NavLink>
           <NavLink to={`${process.env.PUBLIC_URL}/housing`}>Housing</NavLink>
           <NavLink to={`${process.env.PUBLIC_URL}/reviews`}>Reviews</NavLink>
+          <NavLink to={`${process.env.PUBLIC_URL}/verifiedReviews`}>Verified Reviews</NavLink>
           <NavLink to={`${process.env.PUBLIC_URL}/ratings`}>Ratings</NavLink>
           <NavLink to={`${process.env.PUBLIC_URL}/locations`}>Location</NavLink>
         </div>

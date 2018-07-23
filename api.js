@@ -45,9 +45,11 @@ function executeSQL(query, data) {
             console.log(query);
             connection.on('error', (error) => reject(error))
             connection.query(query, data, function(error, rows, fields) {
-                connection.release();
-                if (error) reject(error);
-                else resolve(rows, fields);
+                // setTimeout(()=> {
+                    connection.release();
+                    if (error) reject(error);
+                    else resolve(rows, fields);
+                // }, 1000);
             });
         }).catch((error) => reject(error));
     });
@@ -327,9 +329,9 @@ app.delete("/housing/:title", function(request, response) {
 })
 
 /// 8. Division query
-/// Return Persons who have lived in every house
-app.get("/homeSwappers", function(request, response) {
-    executeSQL("SELECT * From Person")
+/// Return Persons reviewed by all other persons
+app.get("/verifiedReviews", function(request, response) {
+    executeSQL("SELECT * FROM Person WHERE id IN (SELECT revieweePID from Review GROUP BY RevieweePID HAVING COUNT(distinct reviewerPID) = ((SELECT count(id) from Person) - 1))")
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 

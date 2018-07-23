@@ -29,6 +29,7 @@ const Main = () => (
         <Route exact path={`${process.env.PUBLIC_URL}/location/:city`}  component={View} />
         <Route exact path={`${process.env.PUBLIC_URL}/housing`}  component={Table}/>
         <Route exact path={`${process.env.PUBLIC_URL}/housing/:title`}  component={View}/>
+        <Route exact path={`${process.env.PUBLIC_URL}/verifiedReviews`}  component={Table}/>
       </Switch>
   </main>
 )
