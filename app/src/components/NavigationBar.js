@@ -1,23 +1,27 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-const NavigationBar = () => {
-  return (
-    <div>
-      {/* <AppBar position="static">
-        <Toolbar>
-          <Typography variant="title" color="inherit">
-            DormHub
-          </Typography> */}
+
+class NavigationBar extends React.Component {
+
+  render() {
+    return (
+      <header>
+        <nav>
           <ul>
             <li><Link to='/'>Home</Link></li>
             <li><Link to='/persons'>Persons</Link></li>
+            <li><Link to='/seekers'>Seekers</Link></li>
+            <li><Link to='/landlords'>Landlords</Link></li>
+            <li><Link to='/housing'>Housing</Link></li>
+            <li><Link to='/homeSwappers'>Home Swappers</Link></li>
+            <li><Link to='/reviews'>Reviews</Link></li>
+            <li><Link to='/ratings'>Ratings</Link></li>
+            <li><Link to='/locations'>Location</Link></li>
           </ul>
-        {/* </Toolbar>
-      </AppBar> */}
-    </div>
-  )
+        </nav>
+      </header>
+    )
+  }
 }
+
 export default NavigationBar;

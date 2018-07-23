@@ -199,7 +199,7 @@ app.get("/review/:id", function(request, response) {
 /// Delete a Review with specified ID
 app.delete("/review/:id", function(request, response) {
     const id = request.params.id
-    executeSQL("DELETE Review WHERE rid = " + id)
+    executeSQL("DELETE FROM Review WHERE rid = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -234,18 +234,7 @@ app.get("/averageReviewScore/:id", function(request, response) {
 /// 5. Nested aggregation
 /// Query for average review score for each Person
 app.get("/ratings", function(request, response) {
-    executeSQL("SELECT p.id, p.name, p.gender, p.phoneNumber, p.signUpDate, avg(r.rating) FROM Review r, Person p WHERE r.revieweePID = p.id GROUP BY p.pid")
-        .then((rows) => {
-            response.json(rows);
-        }).catch( (error) => { 
-            response.json(error);
-    });
-})
-
-/// 8. Division query
-/// Return Persons who have been reviewed by all other Persons
-app.get("/verifiedRatings", function(request, response) {
-    executeSQL("SELECT * From Person p WHERE NOT EXISTS (SELECT * FROM Review r WHERE r.revieweePID = p.id)")
+    executeSQL("SELECT p.id, p.name, p.gender, p.phoneNumber, p.signUpDate, avg(r.rating) as averageRating FROM Review r, Person p WHERE r.revieweePID = p.id GROUP BY p.id")
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -280,13 +269,13 @@ app.get("/housing", function(request, response) {
 	var sql;
 	const minPrice = request.query.minPrice;
 	const maxPrice = request.query.maxPrice;
-	if (minPrice === undefined && maxPrice === undefined) {
+	if (typeof minPrice === "undefined" && typeof maxPrice === "undefined") {
 		sql = "SELECT * FROM Housing";	
-	} else if (minPrice !== undefined && maxPrice !== undefined) {
-		sql = "SELECT * FROM Housing";
-	} else if (minPrice !== undefined) {
+	} else if (typeof minPrice !== "undefined" && typeof maxPrice !== "undefined") {
+		sql = "SELECT * FROM Housing WHERE price > " + minPrice + " AND price < " + maxPrice;
+	} else if (typeof minPrice !== "undefined") {
 		sql = "SELECT * FROM Housing WHERE price > " + minPrice;
-	} else if (maxPrice !== undefined) {
+	} else if (typeof maxPrice !== "undefined") {
 		sql = "SELECT * FROM Housing WHERE price < " + maxPrice;
 	} else {
 		return response.json({"error":"Undefined Query Parameters"});	
@@ -301,10 +290,45 @@ app.get("/housing", function(request, response) {
 
 /// 6. Update Operation
 /// Update a Housing price specified by the id
-app.post("/housing/:id/:price", function(request, response) {
-    const id = request.params.id;
+app.post("/housing/:postTitle/:price", function(request, response) {
+    const postTitle = request.params.postTitle;
     const price = request.params.price;
-    executeSQL("UPDATE Housing SET * price = " + price + " WHERE id = " + id)
+    executeSQL("UPDATE Housing SET price = " + price + " WHERE postTitle = '" + postTitle + "'")
+        .then((rows) => {
+            response.json(rows);
+        }).catch( (error) => { 
+            response.json(error);
+    });
+})
+
+/// Query for a house with specified title
+app.get("/housing/:title", function(request, response) {
+    const title = request.params.title
+    executeSQL("SELECT * FROM Housing WHERE postTitle = '" + title + "'")
+        .then((rows) => {
+            response.json(rows);
+        }).catch( (error) => { 
+            response.json(error);
+    });
+})
+
+
+/// 7. Delete operation
+/// Delete a House with specified title
+app.delete("/housing/:title", function(request, response) {
+    const title = request.params.title
+    executeSQL("DELETE FROM Housing WHERE postTitle = '" + title + "'")
+        .then((rows) => {
+            response.json(rows);
+        }).catch( (error) => { 
+            response.json(error);
+    });
+})
+
+/// 8. Division query
+/// Return Persons who have lived in every house
+app.get("/homeSwappers", function(request, response) {
+    executeSQL("SELECT * From Person")
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 

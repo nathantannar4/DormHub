@@ -2,14 +2,13 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://nathantannar.me/api/dormhub/",
+  "proxy": "http://localhost:3001",
   "devDependencies": {
     "enzyme": "2.4.1",
     "react-addons-test-utils": "15.4.0",
     "react-scripts": "0.8.5"
   },
   "dependencies": {
-    "@material-ui/core": "^1.4.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
