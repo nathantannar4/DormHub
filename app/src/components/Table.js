@@ -24,6 +24,7 @@ class Table extends Component {
         fetch(endpoint)
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 this.setState({
                     isLoaded: true,
                     data: data

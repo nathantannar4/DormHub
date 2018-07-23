@@ -12,7 +12,7 @@ import View from './View'
 // https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf
 const Main = () => (
   <main>
-     <Switch basename={'/dormhub'}>
+     <Switch>
         <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
         <Route exact path={`${process.env.PUBLIC_URL}/persons`} component={Table}/>
         <Route exact path={`${process.env.PUBLIC_URL}/person/:id`} component={View} />

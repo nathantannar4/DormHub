@@ -25,10 +25,18 @@ class View extends Component {
         fetch(endpoint)
             .then(response => response.json())
             .then(data => {
-                this.setState({
-                    isLoaded: true,
-                    data: data[0]
-                });
+                console.log(data);
+                if (typeof data.length === "undefined") {
+                    this.setState({
+                        isLoaded: true,
+                        data: data
+                    });
+                } else {
+                    this.setState({
+                        isLoaded: true,
+                        data: data[0]
+                    });
+                }
             },
             // Note: it's important to handle errors here
             // instead of a catch() block so that we don't swallow

@@ -42,6 +42,7 @@ function getConnection() {
 function executeSQL(query, data) {
     return new Promise(function(resolve, reject) {
         getConnection().then((connection) => {
+            console.log(query);
             connection.on('error', (error) => reject(error))
             connection.query(query, data, function(error, rows, fields) {
                 connection.release();
