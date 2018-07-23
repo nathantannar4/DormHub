@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.render((
-    <BrowserRouter>
+    <BrowserRouter basename="/dormhub">
       <App />
     </BrowserRouter>
   ), document.getElementById('root'))

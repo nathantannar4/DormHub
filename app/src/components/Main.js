@@ -12,24 +12,23 @@ import View from './View'
 // https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf
 const Main = () => (
   <main>
-     <Switch>
-        <Route exact path='/' component={Home} />
-        <Route exact path='/persons' component={Table}/>
-        <Route exact path='/person/:id' component={View} />
-        <Route exact path='/seekers' component={Table}/>
-        <Route exact path='/seeker/:id' component={View} />
-        <Route exact path='/landlords' component={Table}/>
-        <Route exact path='/landlord/:id' component={View} />
-        <Route exact path='/reviews' component={Table}/>
-        <Route exact path='/review/:id' component={View} />
-        <Route exact path='/reviews/:id' component={Table} />
-        <Route exact path='/averageReviewScore/:id' component={View} />
-        <Route exact path='/ratings' component={Table}/>
-        <Route exact path='/locations' component={Table}/>
-        <Route exact path='/location/:city' component={View} />
-        <Route exact path='/housing' component={Table}/>
-        <Route exact path='/housing/:title' component={View}/>
-        <Route exact path='/homeSwappers' component={Table}/>
+     <Switch basename={'/dormhub'}>
+        <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
+        <Route exact path={`${process.env.PUBLIC_URL}/persons`} component={Table}/>
+        <Route exact path={`${process.env.PUBLIC_URL}/person/:id`} component={View} />
+        <Route exact path={`${process.env.PUBLIC_URL}/seekers`}  component={Table}/>
+        <Route exact path={`${process.env.PUBLIC_URL}/seeker:id`} component={View} />
+        <Route exact path={`${process.env.PUBLIC_URL}/landlords`}  component={Table}/>
+        <Route exact path={`${process.env.PUBLIC_URL}/landlord/:id`}  component={View} />
+        <Route exact path={`${process.env.PUBLIC_URL}/reviews`}  component={Table}/>
+        <Route exact path={`${process.env.PUBLIC_URL}/review/:id`}  component={View} />
+        <Route exact path={`${process.env.PUBLIC_URL}/reviews/:id`}  component={Table} />
+        <Route exact path={`${process.env.PUBLIC_URL}/averageReviewScore/:id`} component={View} />
+        <Route exact path={`${process.env.PUBLIC_URL}/ratings`}  component={Table}/>
+        <Route exact path={`${process.env.PUBLIC_URL}/locations`} component={Table}/>
+        <Route exact path={`${process.env.PUBLIC_URL}/location/:city`}  component={View} />
+        <Route exact path={`${process.env.PUBLIC_URL}/housing`}  component={Table}/>
+        <Route exact path={`${process.env.PUBLIC_URL}/housing/:title`}  component={View}/>
       </Switch>
   </main>
 )
