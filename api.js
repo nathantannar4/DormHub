@@ -234,7 +234,7 @@ app.get("/averageReviewScore/:id", function(request, response) {
 /// 5. Nested aggregation
 /// Query for average review score for each Person
 app.get("/ratings", function(request, response) {
-    executeSQL("SELECT p.id, p.name, p.gender, p.phoneNumber, p.signUpDate, avg(r.rating) as averageRating FROM Review r, Person p WHERE r.revieweePID = p.id GROUP BY p.id")
+    executeSQL("SELECT p.id, p.name, p.gender, p.phoneNumber, p.signUpDate, avg(r.rating) as averageRating FROM Review r, Person p WHERE r.revieweePID = p.id GROUP BY p.id ORDER BY p.id")
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
