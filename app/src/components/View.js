@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PriceForm from './PriceForm'
+import './View.css'
 
 class View extends Component {
 
@@ -71,9 +72,11 @@ class View extends Component {
     generateView(data) {
         const keys = Object.keys(data)
         return keys.map((key) => ( 
-            <div key={key}>
-                <h3>{key}</h3>
-                <p>{data[key]}</p>
+            <div className="content">
+                <div key={key}>
+                    <h3>{key}</h3>
+                    <p>{data[key]}</p>
+                </div>
             </div>
         ))
     }
