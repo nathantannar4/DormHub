@@ -226,7 +226,7 @@ app.get("/reviews/:id", function(request, response) {
 /// Query for the Average Review score on a Person with a specified ID
 app.get("/averageReviewScore/:id", function(request, response) {
     const id = request.params.id
-    executeSQL("SELECT p.id, p.name, avg(r.rating) FROM Review r, Person p WHERE r.revieweePID = p.id AND p.id = " + id)
+    executeSQL("SELECT p.id, p.name, avg(r.rating) as averageRating FROM Review r, Person p WHERE r.revieweePID = p.id AND p.id = " + id)
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
@@ -331,7 +331,7 @@ app.delete("/housing/:title", function(request, response) {
 /// 8. Division query
 /// Return Persons reviewed by all other persons
 app.get("/verifiedReviews", function(request, response) {
-    executeSQL("SELECT * FROM Person WHERE id IN (SELECT revieweePID from Review GROUP BY RevieweePID HAVING COUNT(distinct reviewerPID) = ((SELECT count(id) from Person) - 1))")
+    executeSQL("SELECT p1.id, p1.name, p1.gender, p1.phoneNumber, p1.signUpDate, avg(r.rating) as averageRating FROM Review r, Person p1 WHERE r.revieweePID = p1.id AND NOT EXISTS (SELECT * From Person p2 WHERE p2.id != p1.id AND p2.id NOT IN (SELECT DISTINCT r.reviewerPID FROM Review r WHERE r.revieweePID = p1.id)) GROUP BY p1.id ORDER BY p1.id")
         .then((rows) => {
             response.json(rows);
         }).catch( (error) => { 
