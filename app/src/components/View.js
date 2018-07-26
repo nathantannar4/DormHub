@@ -61,7 +61,7 @@ class View extends Component {
             return (
                 <div>
                     {this.generateView(data)}
-                    {this.generatePriceForm(this.props.match.params.title)}
+                    {this.generatePriceForm(data)}
                 </div>
             )
         } else {
